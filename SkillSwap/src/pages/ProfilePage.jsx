@@ -1,7 +1,7 @@
-import ProfileHeader from "../components/ProfileHeader";
-import SkillList from "../components/SkillList";
-import ReviewCard from "../components/ReviewCard";
-import ReviewForm from "../components/ReviewForm";
+import ProfileHeader from "../profile-page/components/ProfileHeader";
+import SkillList from "../profile-page/components/SkillList";
+import ReviewCard from "../profile-page/components/ReviewCard";
+import ReviewForm from "../profile-page/components/ReviewForm";
 
 function ProfilePage() {
 
