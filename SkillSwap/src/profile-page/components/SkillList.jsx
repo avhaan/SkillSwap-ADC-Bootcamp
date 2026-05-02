@@ -3,7 +3,7 @@ function SkillList({ skillsOffered, skillsWanted }) {
     <div className="skill-list-section">
 
       <div className="skills-box">
-        <h2>Skills Offered</h2>
+        <h2>Skills <span>Offered</span></h2>
 
         {skillsOffered.length === 0 ? (
           // checking edge cases
@@ -13,7 +13,9 @@ function SkillList({ skillsOffered, skillsWanted }) {
             <div key={index} className="single-skill-card">
               <div className="skill-title-row">
                 <h3>{skill.name}</h3>
-                <span className="skill-level">{skill.proficiency}</span>
+                <span className={`skill-level ${skill.proficiency.toLowerCase()}`}>
+                  {skill.proficiency}
+                </span>
               </div>
 
               <p className="skill-category">{skill.category}</p>
@@ -24,7 +26,7 @@ function SkillList({ skillsOffered, skillsWanted }) {
       </div>
 
       <div className="skills-box">
-        <h2>Skills Wanted</h2>
+        <h2>Skills <span>Wanted</span></h2>
 
         {skillsWanted.length === 0 ? (
           <p>No skills wanted yet.</p>
@@ -32,9 +34,6 @@ function SkillList({ skillsOffered, skillsWanted }) {
           skillsWanted.map((skill, index) => (
             <div key={index} className="wanted-skill-pill">
               <h3>{skill.name}</h3>
-
-              // not showing skill category based on figma right now
-              // <p>{skill.category}</p>
             </div>
           ))
         )}

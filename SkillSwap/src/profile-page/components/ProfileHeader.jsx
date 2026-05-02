@@ -22,7 +22,7 @@ function ProfileHeader({ profile }) {
 
         <h1>{profile.name}</h1>
         <p>{profile.location}</p>
-        <p>{profile.bio}</p>
+        <p className="profile-bio">{profile.bio}</p>
 
         <div className="profile-contact">
           {contact.show_email && <p>Email: {profile.email}</p>}

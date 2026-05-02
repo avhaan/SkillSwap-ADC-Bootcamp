@@ -3,6 +3,7 @@ import SkillList from "../profile-page/components/SkillList";
 import ReviewCard from "../profile-page/components/ReviewCard";
 import ReviewForm from "../profile-page/components/ReviewForm";
 import LikeButton from "../profile-page/components/LikeButton";
+import "../profile-page/style.css";
 
 function ProfilePage() {
 
@@ -79,24 +80,57 @@ function ProfilePage() {
   ];
 
   return (
-    <div>
-      <ProfileHeader profile={mockProfile} />
-      <SkillList
-        skillsOffered={mockProfile.skills_offered}
-        skillsWanted={mockProfile.skills_wanted}
-      />
+    <div className="profile-page">
+      <nav className="profile-navbar">
+        <h2>Skill<span>Swap</span></h2>
+        <input placeholder="Search skills..." />
+        <div className="nav-links">
+          <p>Browse</p>
+          <p>My profile</p>
+          <div className="nav-avatar">MR</div>
+        </div>
+      </nav>
 
-      <h2>Reviews</h2>
+      <main className="profile-layout">
+        <aside className="profile-sidebar">
+          <ProfileHeader profile={mockProfile} />
 
-      <ReviewForm />
+          <div className="contact-card">
+            <h3>CONTACT INFO</h3>
 
-      {mockReviews.length === 0 ? (
-        <p>No reviews yet.</p>
-      ) : (
-        mockReviews.map((review) => (
-          <ReviewCard key={review.id} review={review} />
-        ))
-      )}
+            <div className="contact-row">
+              <span>Email</span>
+              <p>{mockProfile.email}</p>
+            </div>
+
+            <div className="contact-row">
+              <span>Phone</span>
+              <p>{mockProfile.contact.phone}</p>
+            </div>
+          </div>
+        </aside>
+
+        <section className="profile-content">
+          <SkillList
+            skillsOffered={mockProfile.skills_offered}
+            skillsWanted={mockProfile.skills_wanted}
+          />
+
+          <section className="reviews-section">
+            <h2>Reviews</h2>
+            <ReviewForm />
+
+            {mockReviews.length === 0 ? (
+              <p>No reviews yet.</p>
+            ) : (
+              mockReviews.map((review) => (
+                <ReviewCard key={review.id} review={review} />
+              ))
+            )}
+          </section>
+        </section>
+        
+      </main>
     </div>
   );
 }
