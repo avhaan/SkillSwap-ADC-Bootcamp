@@ -90,9 +90,13 @@ function ProfilePage() {
 
       <ReviewForm />
 
-      {mockReviews.map((review) => (
-        <ReviewCard key={review.id} review={review} />
-      ))}
+      {mockReviews.length === 0 ? (
+        <p>No reviews yet.</p>
+      ) : (
+        mockReviews.map((review) => (
+          <ReviewCard key={review.id} review={review} />
+        ))
+      )}
     </div>
   );
 }
