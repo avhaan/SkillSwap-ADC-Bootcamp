@@ -1,3 +1,5 @@
+import LikeButton from "./LikeButton";
+
 function ProfileHeader({ profile }) {
   const contact = profile.contact;
 
@@ -27,7 +29,7 @@ function ProfileHeader({ profile }) {
           {contact.show_phone && <p>Phone: {contact.phone}</p>}
         </div>
 
-        <p>Likes: {profile.like_count}</p>
+        <LikeButton initialLikes={profile.like_count} />
       </div>
     </div>
   );

@@ -241,6 +241,31 @@
     line-height: 1.5;
 }
 
+/* ====================
+   LikeButton
+   ==================== */
+
+.like-button {
+    margin-top: 14px;
+    background-color: white;
+    border: 1px solid #5b4fcf;
+    color: #5b4fcf;
+    padding: 10px 16px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.like-button:hover {
+    background-color: #f4f1ff;
+}
+
+.like-button.clicked {
+    background-color: #5b4fcf;
+    color: white;
+}
 
 /* ====================
    This basically makes sure our website doesnt break

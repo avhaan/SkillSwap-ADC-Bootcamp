@@ -2,6 +2,7 @@ import ProfileHeader from "../profile-page/components/ProfileHeader";
 import SkillList from "../profile-page/components/SkillList";
 import ReviewCard from "../profile-page/components/ReviewCard";
 import ReviewForm from "../profile-page/components/ReviewForm";
+import LikeButton from "../profile-page/components/LikeButton";
 
 function ProfilePage() {
 
