@@ -18,10 +18,6 @@ async def get_me(user_id: str = Depends(get_current_user_id)):
     user["_id"] = str(user["_id"])
     return user
 
-
-
-
-
 @router.post("/register")
 async def register(user: dict):
     # checks if it already exists
@@ -48,9 +44,6 @@ async def register(user: dict):
     "token_type": "bearer"
    }
 
-
-
-
 @router.post("/login")
 async def login(user: dict):
     existing_user = await users_collection.find_one({"email": user["email"]})
@@ -72,8 +65,6 @@ async def login(user: dict):
     "access_token": token,
     "token_type": "bearer"
     }
-
-
 
 
 
