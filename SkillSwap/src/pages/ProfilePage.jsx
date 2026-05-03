@@ -9,7 +9,7 @@ function ProfilePage() {
 
   // when auth exists so this - 
   // const isOwnProfile = currentUser?.id === profile.id;
-  const isOwnProfile = true;
+  const isOwnProfile = false;
 
   const mockProfile = {
 
