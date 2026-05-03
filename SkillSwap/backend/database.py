@@ -1,4 +1,5 @@
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import AsyncMongoClient
+from pymongo import ReturnDocument
 from dotenv import load_dotenv
 import os
 
@@ -7,8 +8,8 @@ load_dotenv()
 MONGO_URL = os.getenv("MONGO_URL")
 DB_NAME = os.getenv("DB_NAME", "skillswap")
 
-client = AsyncIOMotorClient(MONGO_URL)
-db = client[DB_NAME]
+client = AsyncMongoClient(MONGO_URL)
+db = client.skillswap
 
 users_collection = db["users"]
 reviews_collection = db["reviews"]
@@ -31,3 +32,5 @@ async def create_indexes():
         [("liker_id", 1), ("target_user_id", 1)],
         unique=True
     )
+
+

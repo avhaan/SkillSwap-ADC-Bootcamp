@@ -1,6 +1,7 @@
 import LikeButton from "./LikeButton";
+import ContactButton from "./ContactButton";
 
-function ProfileHeader({ profile }) {
+function ProfileHeader({ profile, isOwnProfile }) {
   const contact = profile.contact;
 
   return (
@@ -29,7 +30,18 @@ function ProfileHeader({ profile }) {
           {contact.show_phone && <p>Phone: {contact.phone}</p>}
         </div>
 
-        <LikeButton initialLikes={profile.like_count} />
+        <div className="profile-action-buttons">
+          {isOwnProfile ? (
+            <a href="/profile/me/edit" className="edit-profile-button">
+              Edit Profile
+            </a>
+          ) : (
+            <>
+              <LikeButton initialLikes={profile.like_count} />
+              <ContactButton email={profile.email} />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
