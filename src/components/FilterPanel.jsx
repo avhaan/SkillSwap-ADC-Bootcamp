@@ -39,6 +39,12 @@ const PROFICIENCIES = [
                 ))}
 
             </select>
+
+            <select value = {proficiency} onChange={onProficiencyChange} className="filter-select">
+                {PROFICIENCIES.map((level,i) => (
+                    <option key={i} value={level}>{level}</option>
+                ))}
+            </select>
         </div>
     )
 }
