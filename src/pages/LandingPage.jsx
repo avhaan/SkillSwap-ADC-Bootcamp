@@ -1,12 +1,16 @@
 import SkillBadge from "../components/SkillBadge";
-
+import { Link } from "react-router-dom";
+import "./LandingPage.css"
 export default function LandingPage(){
     return(
-        <div>
-        <SkillBadge skill ="Coding" level ="Beginner"/>
-        <SkillBadge skill ="Brazillian Ji Jitsu" level ="Intermediate"/>
-        <SkillBadge skill ="Guitar" level ="Expert"/>
-        <SkillBadge skill ="Yodeling" level ="Advanced"/>
+        
+        <div className="landing">
+            <div className="landing-hero">
+                <h1>Trade what <span> you know</span> </h1>
+                <p>Find someone to swap skills with in seconds.</p>
+                <Link to="/browse" className="landing-btn"> Browse skills</Link>
+            </div>
         </div>
+       
     )
 }
