@@ -9,3 +9,12 @@ MONGO_URL = os.getenv("MONGO_URL")
 
 client = AsyncMongoClient(MONGO_URL)
 db = client.skillswap
+
+users_collection = db["users"]
+reviews_collection = db["reviews"]
+likes_collection = db["likes"]
+
+
+
+async def create_indexes():
+    await users_collection.create_index("email", unique = True)
