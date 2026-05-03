@@ -1,13 +1,7 @@
 import ProfilePage from "./pages/ProfilePage";
-import Navbar from "./profile-page/components/Navbar";
 
 function App() {
-  return (
-    <>  
-      <Navbar />
-      <ProfilePage />
-    </>
-  );
+  return <ProfilePage />;
 }
 
 export default App;
