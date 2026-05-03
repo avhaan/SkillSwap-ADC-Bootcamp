@@ -7,6 +7,10 @@ import "../profile-page/style.css";
 
 function ProfilePage() {
 
+  // when auth exists so this - 
+  // const isOwnProfile = currentUser?.id === profile.id;
+  const isOwnProfile = true;
+
   const mockProfile = {
 
     id: "ut101",
@@ -81,19 +85,10 @@ function ProfilePage() {
 
   return (
     <div className="profile-page">
-      <nav className="profile-navbar">
-        <h2>Skill<span>Swap</span></h2>
-        <input placeholder="Search skills..." />
-        <div className="nav-links">
-          <p>Browse</p>
-          <p>My profile</p>
-          <div className="nav-avatar">MR</div>
-        </div>
-      </nav>
 
       <main className="profile-layout">
         <aside className="profile-sidebar">
-          <ProfileHeader profile={mockProfile} />
+          <ProfileHeader profile={mockProfile} isOwnProfile={isOwnProfile} />
 
           <div className="contact-card">
             <h3>CONTACT INFO</h3>
@@ -118,7 +113,7 @@ function ProfilePage() {
 
           <section className="reviews-section">
             <h2>Reviews</h2>
-            <ReviewForm />
+            {!isOwnProfile && <ReviewForm />}
 
             {mockReviews.length === 0 ? (
               <p>No reviews yet.</p>
