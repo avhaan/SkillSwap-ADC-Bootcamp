@@ -1,6 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from ..database import users_collection
 from bson import ObjectId
+from ..auth import *
 
 router = APIRouter(prefix="/api/users", tags=["users"])
 
@@ -15,6 +16,37 @@ async def get_users():
         users.append(user)
 
     return {"users": users}
+
+
+@router.put("/me")
+async def update_me(updated_data: dict, user_id: str = Depends(get_current_user_id)):
+    updated_user = await users_collection.find_one_and_update(
+        {"_id": ObjectId(user_id)},
+        {"$set": updated_data},
+        return_document=True
+    )
+
+    if updated_user is None:
+        return {"error": "User not found"}
+
+    updated_user["_id"] = str(updated_user["_id"])
+    updated_user.pop("password_hash", None)
+
+    return updated_user
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
