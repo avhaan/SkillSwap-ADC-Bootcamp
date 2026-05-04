@@ -14,7 +14,7 @@ function SkillList({ skillsOffered, skillsWanted }) {
               <div className="skill-title-row">
                 <h3>{skill.name}</h3>
                 <span className={`skill-level ${skill.proficiency.toLowerCase()}`}>
-                  {skill.proficiency}
+                 •  {skill.proficiency}
                 </span>
               </div>
 

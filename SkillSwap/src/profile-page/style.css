@@ -1,27 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
 /* ====================
    Page Layout
    ==================== */
 
 .profile-page {
     min-height: 100vh;
+    width: 100%;
     background-color: #f7f3ee;
     color: #181818;
+    font-family: "Inter", sans-serif;
 }
 
 .profile-layout {
     display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 34px;
-    padding: 36px 42px;
+    grid-template-columns: 360px 1fr;
+    gap: 36px;
+    padding: 48px 52px 70px;
 }
 
-.profile-sidebar {
+.profile-page .profile-sidebar {
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
 
-.profile-content {
+.profile-page .profile-content {
     display: flex;
     flex-direction: column;
     gap: 28px;
@@ -32,7 +36,7 @@
    ProfileHeader
    ==================== */
 
-.profile-header {
+.profile-page .profile-header {
     background-color: #fffdfa;
     border: 1px solid #e6ded2;
     border-radius: 14px;
@@ -40,7 +44,7 @@
     text-align: center;
 }
 
-.profile-avatar {
+.profile-page .profile-avatar {
     width: 120px;
     height: 120px;
     margin: 0 auto 22px;
@@ -54,38 +58,42 @@
     align-items: center;
 }
 
-.profile-avatar img {
+.profile-page .profile-avatar img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.profile-main-info h1 {
+.profile-page .profile-main-info h1 {
     font-size: 28px;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
+    color: #181818;
 }
 
-.profile-location {
+.profile-page .profile-location {
     color: #7a716a;
+    padding-top: 40px;
     margin-bottom: 22px;
 }
 
-.profile-bio {
+.profile-page .profile-bio {
     border-top: 1px solid #e6ded2;
     border-bottom: 1px solid #e6ded2;
     padding: 18px 0;
     margin: 20px 0;
-    text-align: left;
+    text-align: centre;
     color: #6b625b;
     line-height: 1.5;
+    font-style: italic;
 }
+
 
 /* ====================
    Contact Card
    ==================== */
 
-.contact-card {
+.profile-page .contact-card {
     background-color: #fffdfa;
     border: 1px solid #e6ded2;
     border-radius: 14px;
@@ -93,32 +101,32 @@
     font-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
 }
 
-.contact-card h3 {
+.profile-page .contact-card h3 {
     font-size: 14px;
     letter-spacing: 2px;
-    color: #6b625b;
+    color: #77716b;
     margin-bottom: 24px;
     font-weight: 700;
 }
 
-.contact-row {
+.profile-page .contact-row {
     display: grid;
     grid-template-columns: 90px 1fr;
     align-items: center;
     margin-bottom: 16px;
 }
 
-.contact-row:last-child {
+.profile-page .contact-row:last-child {
     margin-bottom: 0;
 }
 
-.contact-row span {
+.profile-page .contact-row span {
     color: #6b625b;
     font-size: 16px;
     font-weight: 400;
 }
 
-.contact-row p {
+.profile-page .contact-row p {
     color: #181818;
     font-size: 16px;
     font-weight: 400;
@@ -126,21 +134,23 @@
     margin: 0;
 }
 
+
 /* ====================
    Profile Buttons Row
    ==================== */
 
-.profile-action-buttons {
+.profile-page .profile-action-buttons {
     display: flex;
     gap: 10px;
     margin-top: 8px;
 }
 
+
 /* ====================
    ContactButton
    ==================== */
 
-.contact-button {
+.profile-page .contact-button {
     flex: 1;
     background-color: #181818;
     color: white;
@@ -148,45 +158,47 @@
     padding: 14px 16px;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 16px;
 }
 
-.contact-button:hover {
+.profile-page .contact-button:hover {
     background-color: #3a342f;
 }
+
 
 /* ====================
    LikeButton
    ==================== */
 
-.like-button {
+.profile-page .like-button {
     flex: 1;
-    margin-top: 2px;
+    margin-top: 0;
     background-color: white;
     border: 2px solid #181818;
     color: #181818;
     padding: 14px 16px;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 16px;
 }
 
-.like-button:hover {
+.profile-page .like-button:hover {
     background-color: #f5f0e8;
 }
 
-.like-button.clicked {
+.profile-page .like-button.clicked {
     background-color: #181818;
     color: white;
 }
+
 
 /* ====================
    Edit Profile Button
    ==================== */
 
-.edit-profile-button {
+.profile-page .edit-profile-button {
     width: 100%;
     background-color: #181818;
     color: white;
@@ -200,7 +212,7 @@
     text-align: center;
 }
 
-.edit-profile-button:hover {
+.profile-page .edit-profile-button:hover {
     background-color: #333333;
 }
 
@@ -209,114 +221,113 @@
    SkillList
    ==================== */
 
-.skill-list-section {
+.profile-page .skill-list-section {
     display: block;
 }
 
-.skills-box {
-    background-color: transparent;
-    padding: 0;
-    margin-bottom: 34px;
-}
-
-.skills-box {
+.profile-page .skills-box {
     background-color: transparent;
     padding: 0;
     margin-bottom: 24px;
 }
 
-.skills-accent {
+.profile-page .skills-accent {
     color: #e95724;
 }
 
-.skills-box h2 {
+.profile-page .skills-box h2 {
     font-size: 25px;
     margin-top: 0;
     margin-bottom: 12px;
     color: #181818;
 }
 
-.skills-box h2 span {
+.profile-page .skills-box h2 span {
     color: #e95724;
 }
 
 .single-skill-card {
     background-color: #fffdfa;
     border: 1px solid #e6ded2;
-    border-radius: 14px;
-    padding: 16px 24px;
-    margin-bottom: 10px;
+    border-radius: 15px;
+    padding: 24px 28px;
+    margin-bottom: 14px;
 }
 
-.skill-title-row {
+.profile-page .skill-title-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
-    margin-bottom: 0px;
+    margin-bottom: 11px;
 }
 
-.skill-title-row h3 {
+.profile-page .skill-title-row h3 {
     font-size: 18px;
+    font-weight: 500;
+    color: #181818;
+    flex: 1;
+    min-width: 0;
 }
 
-.skill-level {
-    padding: 7px 14px;
-    border-radius: 999px;
+.profile-page .skill-level {
+    padding: 7px 14px 7px 10px;
+    border-radius: 8px;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-/* cute lavender */
-.skill-level.expert {
+.profile-page .skill-level.expert {
     background-color: #eee4fb;
     color: #8a63b8;
 }
 
-/* cute sage green */
-.skill-level.intermediate {
+.profile-page .skill-level.intermediate {
     background-color: #dff1e3;
     color: #4e8b61;
 }
 
-/* cute baby blue */
-.skill-level.beginner {
+.profile-page .skill-level.beginner {
     background-color: #dfefff;
     color: #4b77b5;
 }
 
-/* optional if advanced appears */
-.skill-level.advanced {
+.profile-page .skill-level.advanced {
     background-color: #ffe7d6;
     color: #d97732;
 }
 
-.skill-category {
+.profile-page .skill-category {
     color: #6b625b;
-    margin-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
-.skill-description {
+.profile-page .skill-description {
     color: #6b625b;
     line-height: 1.35;
 }
 
-.wanted-skill-pill {
+.profile-page .wanted-skill-pill {
     display: inline-block;
     background-color: transparent;
     border: 1px dashed #b3a79b;
     border-radius: 999px;
-    padding: 0px 18px;
-    margin-right: 10px;
+    padding: 0 18px;
+    margin-right: 15px;
     margin-bottom: 10px;
 }
 
-.wanted-skill-pill h3 {
+.profile-page .wanted-skill-pill h3 {
     font-size: 15px;
     font-weight: 500;
+    color: #181818;
+    padding: 10px 3px;
 }
 
-.wanted-skill-pill p {
+.profile-page .wanted-skill-pill p {
     display: none;
 }
 
@@ -325,19 +336,21 @@
    ReviewForm
    ==================== */
 
-.reviews-section {
+.profile-page .reviews-section {
     background-color: #fffdfa;
     border: 1px solid #e6ded2;
     border-radius: 14px;
     padding: 8px 24px 10px;
 }
 
-.reviews-section h2 {
+.profile-page .reviews-section h2 {
     font-size: 25px;
-    margin-bottom: 14px;
+    padding-top: 15px;
+    margin-bottom: 20px;
+    color: #181818;
 }
 
-.review-form {
+.profile-page .review-form {
     border: 1px solid #e6ded2;
     border-radius: 14px;
     padding: 8px 18px 16px;
@@ -345,17 +358,19 @@
     background-color: white;
 }
 
-.review-form h3 {
-    margin-bottom: 10px;
+.profile-page .review-form h3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #181818;
 }
 
-.star-picker {
+.profile-page .star-picker {
     display: flex;
     gap: 6px;
     margin-bottom: 12px;
 }
 
-.star {
+.profile-page .star {
     background: none;
     border: none;
     font-size: 26px;
@@ -363,11 +378,11 @@
     cursor: pointer;
 }
 
-.star.selected {
+.profile-page .star.selected {
     color: #f5a623;
 }
 
-.review-form textarea {
+.profile-page .review-form textarea {
     width: 100%;
     min-height: 90px;
     padding: 12px;
@@ -381,13 +396,18 @@
     box-sizing: border-box;
 }
 
-.review-submit {
+.profile-page .review-form textarea::placeholder {
+    font-size: 15px;
+    color: #8a8178;
+}
+
+.profile-page .review-submit {
     background-color: #181818;
     color: white;
     border: none;
     padding: 10px 16px;
     border-radius: 10px;
-    font-size: 12px;
+    font-size: 13px;
     cursor: pointer;
 }
 
@@ -396,19 +416,19 @@
    ReviewCard
    ==================== */
 
-.review-card {
+.profile-page .review-card {
     border-top: 1px solid #e6ded2;
     padding: 18px 0;
 }
 
-.review-card-header {
+.profile-page .review-card-header {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 10px;
 }
 
-.reviewer-avatar {
+.profile-page .reviewer-avatar {
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -420,23 +440,24 @@
     font-weight: bold;
 }
 
-.review-card-header h4 {
+.profile-page .review-card-header h4 {
     margin: 0;
+    color: #181818;
 }
 
-.review-card-header p {
+.profile-page .review-card-header p {
     margin: 0;
     color: #7a716a;
     font-size: 14px;
 }
 
-.review-stars {
+.profile-page .review-stars {
     color: #f5a623;
     margin-bottom: 8px;
     font-size: 18px;
 }
 
-.review-comment {
+.profile-page .review-comment {
     color: #6b625b;
     line-height: 1.5;
 }
@@ -447,7 +468,7 @@
    ==================== */
 
 @media (max-width: 900px) {
-    .profile-layout {
+    .profile-page .profile-layout {
         grid-template-columns: 1fr;
     }
 }
