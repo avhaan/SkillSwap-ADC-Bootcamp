@@ -1,34 +1,21 @@
-// use to see profile-page
-//-------------------------------------------------------------------
-// import ProfilePage from "./pages/ProfilePage";
-// import Navbar from "./profile-page/components/Navbar";
-
-// function App() {
-//   return (
-//     <>  
-//       <Navbar />
-//       <ProfilePage />
-//     </>
-//   );
-// }
-
-// export default App;
-//-------------------------------------------------------------------
-
-
-// use to see edit-profile page
-//-------------------------------------------------------------------
-import Navbar from "./profile-page/components/Navbar";
-import EditProfilePage from "./pages/EditProfilePage";
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import LandingPage from './pages/LandingPage'
+import BrowsePage from './pages/BrowsePage'
+import ProfilePage from './pages/ProfilePage'
+import Navbar from './browse-page/Navbar'
 function App() {
+ 
+
   return (
-    <>
-      <Navbar />
-      <EditProfilePage />
-    </>
-  );
+    <BrowserRouter>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/browse" element={<BrowsePage/>} />
+        <Route path="/profile/:id" element={<ProfilePage/>} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
-//-------------------------------------------------------------------
+export default App

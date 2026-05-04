@@ -1,0 +1,310 @@
+/* ====================
+   Browse Page Layout
+   ==================== */
+
+/* browse page container */
+.browse {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* page title */
+.browse-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--ink);
+}
+
+/* search and filter row */
+.browse-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+/* card grid */
+.browse-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* loading text */
+.browse-loading {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* empty state text */
+.browse-empty {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ====================
+   Filter Panel
+   ==================== */
+
+/* Filter panel container */
+.filter-panel {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Dropdown select */
+.filter-select {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background-color: var(--card);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  cursor: pointer;
+}
+
+/* ====================
+   Navbar
+   ==================== */
+
+/* We are using var(--accent) or --bg because if we decide to change the accent,
+   it changes everywhere else.*/
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+  border-bottom: 1px solid var(--line);
+  background-color: var(--bg);
+}
+
+.navbar-logo {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.navbar-logo .skill {
+  color: var(--ink);
+}
+
+.navbar-logo .swap {
+  color: var(--accent);
+}
+
+.navbar-search {
+  width: 300px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background-color: var(--card);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.navbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ====================
+   Pagination
+   ==================== */
+
+/* pagination container */
+.pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* page buttons */
+.pagination-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background-color: var(--card);
+  color: var(--ink);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* active page button */
+.pagination-btn.active {
+  background-color: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* disabled button */
+.pagination-btn:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* ====================
+   Search Bar
+   ==================== */
+
+/* Search bar container */
+.searchbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Text input */
+.searchbar-input {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background-color: var(--card);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  width: 300px;
+}
+
+/* Search button */
+.searchbar-btn {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ====================
+   Skill Badge
+   ==================== */
+
+/* Base pill styles */
+.skill-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Proficiency colors from the mockup style guide */
+.skill-badge.beginner {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.skill-badge.intermediate {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.skill-badge.advanced {
+  background-color: #ffedd5;
+  color: #c2410c;
+}
+
+.skill-badge.expert {
+  background-color: #f3e8ff;
+  color: #7e22ce;
+}
+
+/* ====================
+   Skill Card
+   ==================== */
+
+/* Card container */
+.skill-card {
+  background-color: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* Avatar circle */
+.skill-card-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Avatar image */
+.skill-card-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Name */
+.skill-card-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* Location */
+.skill-card-location {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Badges row */
+.skill-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+/* Like count */
+.skill-card-likes {
+  font-size: 12px;
+  color: var(--muted);
+}

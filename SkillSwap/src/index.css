@@ -1,6 +1,23 @@
-html, body, #root {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #fdfcf8;
+  --card: #ffffff;
+  --ink: #1a1816;
+  --accent: #e35d2b;
+  --line: #e5e1d8;
+  --muted: #6b6660;
+}
+
+* {
   margin: 0;
   padding: 0;
-  width: 100%;
-  min-height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
 }
