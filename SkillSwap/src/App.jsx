@@ -5,7 +5,6 @@ import BrowsePage from "./pages/BrowsePage";
 import LandingPage from "./pages/LandingPage";
 import EditProfilePage from "./pages/EditProfilePage";
 
-// IMP: do "npm install react-router-dom" to see the project
 
 function App() {
   return (
