@@ -450,13 +450,4 @@
     .profile-layout {
         grid-template-columns: 1fr;
     }
-
-    .profile-navbar {
-        gap: 16px;
-        padding: 0 20px;
-    }
-
-    .profile-navbar input {
-        width: 220px;
-    }
 }
