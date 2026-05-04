@@ -12,7 +12,7 @@ export default function SkillCard({ user }) {
   const initials = user.name.split(' ').map(n => n[0]).join('')
 
   return (
-    <div className="skill-card">
+    <div className="skill-card" onClick={() => navigate(`/profile/${user._id}`)}>
 
       {/* shows initials if no image url. it uses a conditional operator to evaluate if
           the user has a image.  */}
