@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { apiBrowseUsers } from '../api/api.jsx'
-import SkillCard from '../browse-page/SkillCard.jsx'
-import SearchBar from '../browse-page/SearchBar.jsx'
+import SkillCard from '../browse-page/components/SkillCard.jsx'
+import SearchBar from '../browse-page/components/SearchBar.jsx'
 import FilterPanel from '../browse-page/components/FilterPanel.jsx'
-import Pagination from '../browse-page/Pagination.jsx'
+import Pagination from '../browse-page/components/Pagination.jsx'
 import "../browse-page/style.css";
 
 

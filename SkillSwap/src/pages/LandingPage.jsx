@@ -1,4 +1,4 @@
-import SkillBadge from "../browse-page/SkillBadge";
+import SkillBadge from "../browse-page/components/SkillBadge";
 import { Link } from "react-router-dom";
 import "../landing-page/style.css";
 
