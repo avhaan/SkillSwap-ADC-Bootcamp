@@ -103,7 +103,7 @@ export default function RegisterPage() {
                             {loading ? "Creating Account..." : "Create Account"}
                         </button>
 
-                        <p>{error}</p>
+                        <p className="error-text">{error}</p>
                     </form>
                 </div>
             </div>  

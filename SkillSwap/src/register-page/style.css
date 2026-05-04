@@ -36,7 +36,7 @@
 
 .skill-swap {
     font-family: font family/Font 1;
-    font-weight: font weight/700;
+    font-weight: 700;
     font-style: Bold;
     font-size: 22px;
     line-height: 50%;
@@ -47,6 +47,7 @@
     height: 27px;
     opacity: 1px;
     color: #FFFFFF;
+    
 }
 
 .trade-text {
@@ -54,8 +55,10 @@
     height: 73px;
     opacity: 1;
     color: #FFFFFF;
-    font-size: 28px;
-    line-height: 5%;
+    font-size: 25px;
+    line-height: 120%;
+
+    
 }
 
 .own-text {
@@ -63,7 +66,7 @@
     font-family: font family/Font 1;
     font-weight: 400;
     font-style: Regular;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
     vertical-align: middle;
@@ -110,7 +113,7 @@ input {
 }
 
 .submit-button {
-    width: 522px;
+    width: 487px;
     height: 41px;
     border-radius: 8px;
     opacity: 1;
@@ -122,4 +125,9 @@ input {
 
 label {
     font-size: 14px;
+}
+
+.error-text {
+    margin-top: 10px;
+    font-size: 15px;
 }
