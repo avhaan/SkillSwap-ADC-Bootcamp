@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
 import BrowsePage from './pages/BrowsePage'
 import ProfilePage from './pages/ProfilePage'
-import Navbar from './components/Navbar'
+import Navbar from './browse-page/Navbar'
 function App() {
  
 

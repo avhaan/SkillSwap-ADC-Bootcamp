@@ -1,4 +1,3 @@
-import "./FilterPanel.css"
 export default function FilterPanel({category, proficiency, onCategoryChange, onProficiencyChange }){
 const CATEGORIES = [
   'All categories',

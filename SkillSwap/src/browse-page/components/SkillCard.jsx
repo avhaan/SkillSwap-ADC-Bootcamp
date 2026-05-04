@@ -1,7 +1,6 @@
 // Displays avatar, name, location, top 3 skills, and like count
 
 import SkillBadge from './SkillBadge'
-import './SkillCard.css'
 
 export default function SkillCard({ user }) {
 

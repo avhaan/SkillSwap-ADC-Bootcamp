@@ -1,6 +1,6 @@
 // Prev/next buttons with current page display
 // Used at the bottom of the browse page
-import './Pagination.css'
+
 /* these props take in the current page we are on, how many total pages are needed and the
 page change */
 export default function Pagination({ currentPage, totalPages, onPageChange }) {

@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { apiBrowseUsers } from '../api/api.jsx'
-import SkillCard from '../components/SkillCard.jsx'
-import SearchBar from '../components/SearchBar.jsx'
-import FilterPanel from '../components/FilterPanel.jsx'
-import Pagination from '../components/Pagination.jsx'
-import './BrowsePage.css'
+import SkillCard from '../browse-page/SkillCard.jsx'
+import SearchBar from '../browse-page/SearchBar.jsx'
+import FilterPanel from '../browse-page/components/FilterPanel.jsx'
+import Pagination from '../browse-page/Pagination.jsx'
+import "../browse-page/style.css";
+
 
 export default function BrowsePage() {
 

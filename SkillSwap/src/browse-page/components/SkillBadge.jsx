@@ -1,5 +1,3 @@
-import './SkillBadge.css'
-
 export default function SkillBadge({skill, level}) {
     return(
         <span className={`skill-badge ${level.toLowerCase()}`}>

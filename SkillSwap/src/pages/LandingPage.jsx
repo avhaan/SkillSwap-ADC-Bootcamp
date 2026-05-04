@@ -1,6 +1,7 @@
-import SkillBadge from "../components/SkillBadge";
+import SkillBadge from "../browse-page/SkillBadge";
 import { Link } from "react-router-dom";
-import "./LandingPage.css"
+import "../landing-page/style.css";
+
 export default function LandingPage(){
     return(
         

@@ -1,5 +1,3 @@
-import "./SearchBar.css"
-
 export default function SearchBar({val, onChange, onSearch}){
     function keyPressed(e){
         if(e.key === 'Enter'){
