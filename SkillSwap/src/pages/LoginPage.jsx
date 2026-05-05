@@ -15,7 +15,7 @@ export default function LoginPage() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        setError("")
+        setError("ec")
 
         // makes the button show that the log in is loading
         setLoading(true)
