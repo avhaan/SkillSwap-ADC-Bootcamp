@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 import { AuthProvider } from "./context/AuthContext";
+import LoginPage from "./pages/LoginPage";
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
         <Route path="/browse" element={<BrowsePage />} />
         <Route path="/profile/me" element={<ProfilePage />} />
         <Route path="/profile/me/edit" element={<EditProfilePage />} />
-        <Route path = "/register" element={<RegisterPage />} />
+        <Route path ="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
       </AuthProvider>
     </BrowserRouter>

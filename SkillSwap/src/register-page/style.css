@@ -131,3 +131,18 @@ label {
     margin-top: 10px;
     font-size: 15px;
 }
+
+.register span {
+    text-decoration: underline;
+    color:#e35d2b
+}
+
+.register {
+    font-family: font family/Font 1;
+    font-weight: font weight/400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+}
