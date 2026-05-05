@@ -1,89 +1,169 @@
 .login-page {
-    width: 1200px;
-    height: 582px;
-    border-radius: 12px;
-    opacity: 1;
-    background: #FDFCF8;
-    display:flex;
-
-    
+    width: 100%;
+    min-height: 100vh;
+    background: #f7f3ee;
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
 .skill-swap {
-    font-family: font family/Font 1;
-    font-weight: font weight/700;
-    font-style: Bold;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
     font-size: 22px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    vertical-align: middle;
+}
 
+.skill-swap h2 {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 18px;
 }
 
 .welcome-text {
-    color: #FFFFFF;
-    font-family: font family/Font 1;
-    font-weight: font weight/500;
-    font-style: Medium;
-    font-size: 28px;
-    line-height: line height/36_4;
-    letter-spacing: 0%;
-    vertical-align: middle;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.15;
+}
 
+.welcome-text h2 {
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 28px;
 }
 
 .pick-text {
-    color: #A8A39C;
-    font-family: font family/Font 1;
-    font-weight: font weight/400;
-    font-style: Regular;
+    color: #a8a39c;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
     font-size: 13px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    vertical-align: middle;
+}
 
+.pick-text p {
+    color: #a8a39c;
+    font-family: "Inter", sans-serif;
+    font-weight: 100;
+    font-size: 17px;
 }
 
 span {
-    color: #e35d2b;
+    color: #e95724;
+}
+
+.left-panel {
+    width: 100%;
+    height: 330px;
+    background-color: #181818;
+    padding: 60px 70px;
 }
 
 .right-panel {
-    width: 599px;
-    height: 580px;
-    padding-top: 144px;
-    padding-right: 56px;
-    padding-bottom: 144px;
-    padding-left: 56px;
-    opacity: 1;
-    left: 599px;
-    background: #FFFFFF;
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px;
 }
 
 .sign-in {
     font-family: font family/Font 1;
     font-weight: font weight/700;
     font-style: Bold;
-    font-size: 28px;
+    font-size: 20px;
     line-height: 100%;
     letter-spacing: 0%;
     vertical-align: middle;
 }
 
+.sign-in h2 {
+    font-family: "Inter", sans-serif;
+    font-size: 36px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #181818;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 520px;
+}
+
 .form-group {
-    width: 487px;
-    height: 79px;
-    padding-bottom: 18px;
-    opacity: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    font-size: 16px;
+    font-weight: 400;
+    color: #181818;
+}
+
+.form-group input {
+    width: 100%;
+    height: 56px;
+    border: 1px solid #d8cfc4;
+    border-radius: 10px;
+    padding: 0 18px;
+    font-size: 16px;
+    font-family: inherit;
+    background-color: white;
+    box-sizing: border-box;
 }
 
 .card {
-    margin-top: 25px;
+    width: 100%;
+    margin-top: 0;
 }
 
 .error-text {
-    margin-top: 10px;
+    margin-top: 18px;
     font-size: 15px;
+    color: #e95724;
+}
+
+.register {
+    margin-top: 10px;
+    margin-bottom: 44px;
+    font-weight: 50;
+}
+
+.register h3 {
+    font-size: 16px;
+    font-weight: 50;
+    color: #6b625b;
+}
+
+.register a {
+    color: #e95724;
+    font-weight: 50;
+}
+
+.submit-button {
+    width: 100%;
+    height: 62px;
+    background-color: #181818;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background-color: #333333;
 }
