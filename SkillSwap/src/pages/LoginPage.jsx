@@ -1,12 +1,15 @@
 import {useState} from "react"
 import "../login-page/style.css"
-import {Link} from 'react-router-dom'
-import { apiLogin } from "../api/api"
+import {Link, useNavigate} from 'react-router-dom'
+import {useAuth} from "../context/AuthContext.jsx"
+import {apiLogin} from "../api/api"
 
 export default function LoginPage() {
     const [form, setForm] = useState({email: "", password: ""})
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
+    const {login} = useAuth() // gets the login method from the AuthContext file
+    const navigate = useNavigate()
 
     function handleChange(e) {
         setForm(f => ({...f, [e.target.name]: e.target.value}))
@@ -15,7 +18,12 @@ export default function LoginPage() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        setError("ec")
+        setError("")
+
+        if (!form.email.trim() || !form.password.trim()) { // one of the fields is not filled in
+            setError("Please enter both fields")
+            return
+        }   
 
         // makes the button show that the log in is loading
         setLoading(true)

@@ -11,7 +11,7 @@ export default function RegisterPage() {
     const [form, setForm] = useState({name: "", email: "", password: ""})
     const [loading, setLoading] = useState(false)
     const {login} = useAuth() // gets the login method from the AuthContext file
-   const navigate = useNavigate()
+    const navigate = useNavigate()
 
     // called when the form is submitted
     async function handleSubmit(e) {
