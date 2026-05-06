@@ -36,9 +36,22 @@ export default function LoginPage() {
                 headers: {Authorization: `Bearer ${access_token}`}  
             })
 
-            const me = await res.json() // turns the result into a json
-            login(access_token, me) // logs in the user on the frontend
-            navigate("/browse") // navigates to the browse page
+            // checks if the api call succeeded in finding the user's profile
+            // if it does not work, then 
+            if (!res.ok) {
+                setError("Incorrect username or password")
+            }
+
+            // the login is valid on the backend
+            else {
+                const me = await res.json() // turns the result into a json
+                console.log(me)
+                login(access_token, me) // logs in the user on the frontend
+                navigate("/browse") // navigates to the browse page
+
+                test = apiGetMe()
+                console.log(test)
+            }
         }
         
         catch (err) {

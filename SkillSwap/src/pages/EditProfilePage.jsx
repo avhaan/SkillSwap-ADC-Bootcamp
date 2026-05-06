@@ -3,6 +3,7 @@ import "../edit-profile-page/style.css";
 import BasicInfoForm from "../edit-profile-page/components/BasicInfoForm";
 import OfferedSkillEditor from "../edit-profile-page/components/OfferedSkillEditor";
 import WantedSkillEditor from "../edit-profile-page/components/WantedSkillEditor";
+import { apiGetMe } from "../api/api";
 
 function EditProfilePage() {
   const [formData, setFormData] = useState({
@@ -29,6 +30,9 @@ function EditProfilePage() {
     ],
     skills_wanted: ["React / JavaScript", "Photography", "French"],
   });
+
+  const me = apiGetMe()
+
 
   // creates a state variable for the little pill boxes under “Skills wanted”
   const [wantedInput, setWantedInput] = useState("");

@@ -4,6 +4,7 @@ import ReviewCard from "../profile-page/components/ReviewCard";
 import ReviewForm from "../profile-page/components/ReviewForm";
 import LikeButton from "../profile-page/components/LikeButton";
 import "../profile-page/style.css";
+import { apiGetMe } from "../api/api";
 
 function ProfilePage() {
 
