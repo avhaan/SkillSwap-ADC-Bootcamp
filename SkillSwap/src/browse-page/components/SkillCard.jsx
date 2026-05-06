@@ -36,9 +36,9 @@ export default function SkillCard({ user }) {
         {/* this grabs the first 3 skills from the users skill bank and
             maps each one into a Skill Badge component with i as the index
             which is used as a key. */}
-        {user.skills_offered.slice(0, 3).map((skill, i) => (
+        {(user.skills_offered || []).slice(0, 3).map((skill, i) => (
           <SkillBadge key={i} skill={skill.name} level={skill.proficiency} />
-        )) }
+        ))} 
       </div>
 
       {/* this is the like count of our user.*/}
