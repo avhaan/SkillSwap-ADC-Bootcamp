@@ -45,12 +45,8 @@ export default function LoginPage() {
             // the login is valid on the backend
             else {
                 const me = await res.json() // turns the result into a json
-                console.log(me)
                 login(access_token, me) // logs in the user on the frontend
                 navigate("/browse") // navigates to the browse page
-
-                test = apiGetMe()
-                console.log(test)
             }
         }
         
