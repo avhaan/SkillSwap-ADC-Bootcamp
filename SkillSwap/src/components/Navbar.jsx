@@ -6,7 +6,7 @@ import "./Navbar.css";
 function Navbar() {
   return (
     <nav className="navbar">
-      <Link to="/browse" className="navbar-logo">
+      <Link to="/" className="navbar-logo">
         Skill<span>Swap</span>
       </Link>
 
