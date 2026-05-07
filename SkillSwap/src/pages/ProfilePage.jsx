@@ -69,15 +69,16 @@ function ProfilePage() {
             setLoggedIn(false);
           }
         }
-
-        await refreshReviews(profile._id);
-      } catch (err) {
-        console.error("Failed to load profile:", err);
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
+        
+        const revs = await apiGetReviews(user_id)
+        setReviews(revs) 
+      } catch (error) {
+      console.error("Failed to load profile:", error);
+    } finally {
+      setLoading(false);
     }
+      
+    } 
 
     loadProfile();
   }, [isMeRoute, user_id]);
@@ -107,7 +108,7 @@ function ProfilePage() {
     <div className="profile-page">
       <main className="profile-layout">
         <aside className="profile-sidebar">
-          <ProfileHeader profile={user} isOwnProfile={isOwnProfile} />
+          <ProfileHeader profile={user} isOwnProfile={isOwnProfile}/>
 
           <div className="contact-card">
             <h3>CONTACT INFO</h3>

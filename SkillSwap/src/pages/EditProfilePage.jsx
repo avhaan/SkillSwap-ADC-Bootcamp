@@ -4,6 +4,7 @@ import BasicInfoForm from "../edit-profile-page/components/BasicInfoForm";
 import OfferedSkillEditor from "../edit-profile-page/components/OfferedSkillEditor";
 import WantedSkillEditor from "../edit-profile-page/components/WantedSkillEditor";
 import { apiGetMe, apiUpdateProfile } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 
 function EditProfilePage() {
@@ -39,6 +40,8 @@ function EditProfilePage() {
 
   // creates a state variable for the little pill boxes under “Skills wanted”
   const [wantedInput, setWantedInput] = useState("");
+
+  const navigate = useNavigate()
 
   useEffect(() => {
       async function loadProfile() {
@@ -145,8 +148,15 @@ function EditProfilePage() {
     // later we need to add it to the database
     // console.log("Saved profile:", formData);
 
-    console.log(formData)
-    await apiUpdateProfile(formData)
+    try {
+      await apiUpdateProfile(formData)
+    }
+
+    catch (err) {
+
+    }
+    
+    navigate("/profile/me")
   }
 
   function handleCancel() {
