@@ -60,7 +60,8 @@ function ReviewForm({ targetUserId, onReviewSaved }) {
             // and then classify them as selected or not, to color them in style.css
             className={star <= rating ? "star selected" : "star"}
             onClick={() => setRating(star)}
-          > ★
+          >
+            {String.fromCharCode(9733)}
           </button>
         ))}
       </div>

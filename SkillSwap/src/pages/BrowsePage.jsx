@@ -1,6 +1,5 @@
-// this is the main marketplace page.
-
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { apiBrowseUsers } from '../api/api.jsx'
 import SkillCard from '../browse-page/components/SkillCard.jsx'
 import SearchBar from '../browse-page/components/SearchBar.jsx'
@@ -8,69 +7,73 @@ import FilterPanel from '../browse-page/components/FilterPanel.jsx'
 import Pagination from '../browse-page/components/Pagination.jsx'
 import "../browse-page/style.css";
 
-
 export default function BrowsePage() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const urlSearch = searchParams.get('search') || ''
 
-  // store the list of users returned from the API
   const [users, setUsers] = useState([])
-
-  // store the total number of pages for pagination
   const [totalPages, setTotalPages] = useState(1)
-
-  // current page number
   const [page, setPage] = useState(1)
-
-  // this is for search input
-  const [search, setSearch] = useState('')
-
-  // selected category filter
+  const [lastUrlSearch, setLastUrlSearch] = useState(urlSearch)
   const [category, setCategory] = useState('')
-
-  // our proficiency filter
   const [proficiency, setProficiency] = useState('')
-
-  // loading state — we set it to false intially but it is true when waiting for API
   const [loading, setLoading] = useState(false)
 
-  // fetchUsers — calls the API with current filters and updates the users list
-  async function fetchUsers() {
-    /* setting our loading to true while we wait */
-    setLoading(true)
-    try {
-        /* we fetch our api users and how many pages need to be shown, if it does not work we catch it and log
-           the error in the console.*/
-      const data = await apiBrowseUsers({ search, category, proficiency, page, limit: 12 })
-      setUsers(data.users)
-      setTotalPages(data.total_pages)
-    } catch (err) {
-      console.error('Failed to fetch users:', err)
+  if (lastUrlSearch !== urlSearch) {
+    setLastUrlSearch(urlSearch)
+    if (page !== 1) {
+      setPage(1)
     }
-    /* set our loading to false after  */
-    setLoading(false)
   }
 
-  // anytime the page, category or proficiency changes we fetch our users.
   useEffect(() => {
-    fetchUsers()
-  }, [page, category, proficiency])
+    let cancelled = false
 
-  // runs when user clicks search button
-  function handleSearch() {
-    setPage(1) // after each search we set our page back to 1
-    fetchUsers()
+    const timer = window.setTimeout(async () => {
+      setLoading(true)
+      try {
+        const data = await apiBrowseUsers({ search: urlSearch, category, proficiency, page, limit: 12 })
+        if (!cancelled) {
+          setUsers(data.users)
+          setTotalPages(data.total_pages)
+        }
+      } catch (err) {
+        console.error('Failed to fetch users:', err)
+      }
+
+      if (!cancelled) {
+        setLoading(false)
+      }
+    }, 0)
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(timer)
+    }
+  }, [page, category, proficiency, urlSearch])
+
+  function handleSearch(searchValue) {
+    const nextSearch = searchValue.trim()
+    const nextParams = new URLSearchParams(searchParams)
+
+    if (nextSearch) {
+      nextParams.set('search', nextSearch)
+    } else {
+      nextParams.delete('search')
+    }
+
+    setPage(1)
+    setSearchParams(nextParams)
   }
 
   return (
     <div className="browse">
-
-      {/* page title */}
       <h1 className="browse-title">The <span className="accent">marketplace</span></h1>
 
-      {/* search and filter row */}
       <div className="browse-controls">
         <SearchBar
-          value={search}
-          onChange={e => setSearch(e.target.value)}
+          key={urlSearch}
+          initialValue={urlSearch}
           onSearch={handleSearch}
         />
         <FilterPanel
@@ -81,28 +84,23 @@ export default function BrowsePage() {
         />
       </div>
 
-      {/* loading  the state */}
       {loading && <p className="browse-loading">Loading...</p>}
 
-      {/* empty state, our api found nothing */}
       {!loading && users.length === 0 && (
         <p className="browse-empty">No users found. Try a different search.</p>
       )}
 
-      {/* user card grid */}
       <div className="browse-grid">
         {users.map(user => (
           <SkillCard key={user._id} user={user} />
         ))}
       </div>
 
-      {/* pagination */}
       <Pagination
         currentPage={page}
         totalPages={totalPages}
         onPageChange={setPage}
       />
-
     </div>
   )
 }

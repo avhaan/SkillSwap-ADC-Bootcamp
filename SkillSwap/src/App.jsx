@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/browse" element={<BrowsePage />} />
-        <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route path="/profile/:user_id" element={<ProfilePage />} />
         <Route path="/profile/me" element={<ProfilePage />} />
         <Route path="/profile/me/edit" element={<EditProfilePage />} />
         <Route path ="/register" element={<RegisterPage />} />

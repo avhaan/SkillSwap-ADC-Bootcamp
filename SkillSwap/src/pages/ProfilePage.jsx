@@ -1,162 +1,170 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { apiGetMe, apiGetReviews, apiGetUser } from "../api/api";
 import ProfileHeader from "../profile-page/components/ProfileHeader";
 import SkillList from "../profile-page/components/SkillList";
 import ReviewCard from "../profile-page/components/ReviewCard";
 import ReviewForm from "../profile-page/components/ReviewForm";
 import "../profile-page/style.css";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { apiGetMe, apiGetReviews, apiGetUser } from "../api/api.jsx";
+
+const emptyReviews = { reviews: [], average_rating: null, total: 0 };
 
 function ProfilePage() {
-  // gets the user_id from the url
   const { user_id } = useParams();
+  const isMeRoute = !user_id || user_id === "me";
 
-  const [user, setUser] = useState(null)
-  const [isOwnProfile, setIsOwnProfile] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [reviews, setReviews] = useState(null)
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState(null);
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState(emptyReviews);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
 
+  async function refreshReviews(targetUserId) {
+    const revs = await apiGetReviews(targetUserId);
+    setReviews(revs);
+  }
 
   useEffect(() => {
     async function loadProfile() {
-    try {
-      // checks if using profile/me
-      if (user_id === "me") {
-        const me = await apiGetMe()
-        setUser(me)
-        setIsOwnProfile(true)
+      await Promise.resolve();
 
-        const revs = await apiGetReviews(me._id)
-        setReviews(revs) 
-      }
+      setLoading(true);
+      setShowReviewForm(false);
+      setReviews(emptyReviews);
 
-      // using profile/{user_id}
-      else {
-        const profile = await apiGetUser(user_id)
-        setUser(profile)
+      try {
+        if (isMeRoute) {
+          if (!localStorage.getItem("token")) {
+            setUser(null);
+            setIsOwnProfile(false);
+            setLoggedIn(false);
+            return;
+          }
 
-        // checks if a user is logged in
-        if (localStorage.getItem("token") !== null) {
-          const me = await apiGetMe()
-          setIsOwnProfile(me?._id === user_id)
-          setLoggedIn(true)
+          const me = await apiGetMe();
+          setUser(me);
+          setIsOwnProfile(true);
+          setLoggedIn(true);
+          await refreshReviews(me._id);
+          return;
         }
-        
 
-        const revs = await apiGetReviews(user_id)
-        setReviews(revs) 
+        const profile = await apiGetUser(user_id);
+        if (!profile?._id) {
+          throw new Error("User not found");
+        }
+
+        setUser(profile);
+        setIsOwnProfile(false);
+        setLoggedIn(false);
+
+        if (localStorage.getItem("token")) {
+          try {
+            const me = await apiGetMe();
+            setIsOwnProfile(me?._id === profile._id);
+            setLoggedIn(Boolean(me));
+          } catch {
+            setIsOwnProfile(false);
+            setLoggedIn(false);
+          }
+        }
+
+        await refreshReviews(profile._id);
+      } catch (err) {
+        console.error("Failed to load profile:", err);
+        setUser(null);
+      } finally {
+        setLoading(false);
       }
-      
-      
     }
 
-    catch (err) {
+    loadProfile();
+  }, [isMeRoute, user_id]);
 
-    }
-
-    finally {
-      setLoading(false)
-    }
-  }
-    loadProfile()
-  }, [])
-
-  // displays loading when the api calls are loading
   if (loading) {
-    return (
-    <p>Loading...</p>
-    )
+    return <p>Loading...</p>;
   }
-
 
   if (!user) {
     return (
-    <p>User does not exist</p>
-    )
-  }
-
-
-
-  
-
-  // when auth exists so this - 
-  
-
-  // when auth exists so this -
-  // const isOwnProfile = currentUser?.id === profile.id;
-  // const isOwnProfile = isSelf(user_id)
-  // const isOwnProfile = false;
-
-
-
-  async function loadProfile() {
-    setLoading(true);
-
-    try {
-      const user = id ? await apiGetUser(id) : await apiGetMe();
-      setProfile(user);
-
-      try {
-        const reviewData = await apiGetReviews(user._id);
-        setReviews(reviewData.reviews || []);
-      } catch {
-        setReviews([]);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    loadProfile();
-  }, [id]);
-
-  if (loading) {
-    return <p className="profile-page">Loading profile...</p>;
-  }
-
-  if (!profile || profile.error) {
-    return <p className="profile-page">Profile not found.</p>;
+      <div className="profile-page">
+        <main className="profile-layout profile-message-layout">
+          <section className="profile-message">
+            <p>{isMeRoute ? "Log in to view your profile." : "User does not exist."}</p>
+            {isMeRoute && (
+              <Link className="add-review-button" to="/login">
+                Log in
+              </Link>
+            )}
+          </section>
+        </main>
+      </div>
+    );
   }
 
   return (
     <div className="profile-page">
       <main className="profile-layout">
         <aside className="profile-sidebar">
-          <ProfileHeader profile={profile} isOwnProfile={isOwnProfile} />
+          <ProfileHeader profile={user} isOwnProfile={isOwnProfile} />
 
           <div className="contact-card">
             <h3>CONTACT INFO</h3>
 
             <div className="contact-row">
               <span>Email</span>
-              <p>{profile.email}</p>
+              <p>{user.email}</p>
             </div>
 
-            {profile.contact?.show_phone && profile.contact?.phone && (
-              <div className="contact-row">
-                <span>Phone</span>
-                <p>{profile.contact.phone}</p>
-              </div>
-            )}
+            <div className="contact-row">
+              <span>Phone</span>
+              <p>{user.contact?.phone ? user.contact.phone : "Unknown"}</p>
+            </div>
           </div>
         </aside>
 
         <section className="profile-content">
           <SkillList
-            skillsOffered={profile.skills_offered || []}
-            skillsWanted={profile.skills_wanted || []}
+            skillsOffered={user.skills_offered}
+            skillsWanted={user.skills_wanted}
           />
 
           <section className="reviews-section">
-            <h2>Reviews</h2>
-            {!isOwnProfile && loggedIn && <ReviewForm user_id={user_id}/>}
+            <div className="reviews-header">
+              <h2>Reviews</h2>
 
-            {reviews.length === 0 ? (
+              {!isOwnProfile && loggedIn && !showReviewForm && (
+                <button
+                  type="button"
+                  className="add-review-button"
+                  onClick={() => setShowReviewForm(true)}
+                >
+                  Add review
+                </button>
+              )}
+
+              {!isOwnProfile && !loggedIn && (
+                <Link className="add-review-button" to="/login">
+                  Log in to review
+                </Link>
+              )}
+            </div>
+
+            {!isOwnProfile && loggedIn && showReviewForm && (
+              <ReviewForm
+                targetUserId={user._id}
+                onReviewSaved={() => {
+                  setShowReviewForm(false);
+                  refreshReviews(user._id);
+                }}
+              />
+            )}
+
+            {reviews.reviews.length === 0 ? (
               <p>No reviews yet.</p>
             ) : (
-              reviews.map((review) => (
+              reviews.reviews.map((review) => (
                 <ReviewCard key={review.id} review={review} />
               ))
             )}

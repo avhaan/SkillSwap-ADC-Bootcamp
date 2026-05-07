@@ -1,4 +1,7 @@
 function ReviewCard({ review }) {
+  const filledStar = String.fromCharCode(9733);
+  const emptyStar = String.fromCharCode(9734);
+
   return (
     <div className="review-card">
       <div className="review-card-header">
@@ -13,8 +16,8 @@ function ReviewCard({ review }) {
       </div>
 
       <div className="review-stars">
-        {"★".repeat(review.rating)}
-        {"☆".repeat(5 - review.rating)}
+        {filledStar.repeat(review.rating)}
+        {emptyStar.repeat(5 - review.rating)}
       </div>
 
       <p className="review-comment">{review.comment}</p>

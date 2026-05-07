@@ -31,6 +31,24 @@
     gap: 28px;
 }
 
+.profile-page .profile-message-layout {
+    display: block;
+}
+
+.profile-page .profile-message {
+    background-color: #fffdfa;
+    border: 1px solid #e6ded2;
+    border-radius: 14px;
+    padding: 24px;
+    max-width: 420px;
+}
+
+.profile-page .profile-message p {
+    color: #181818;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
 
 /* ====================
    ProfileHeader
@@ -343,11 +361,36 @@
     padding: 8px 24px 10px;
 }
 
+.profile-page .reviews-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
 .profile-page .reviews-section h2 {
     font-size: 25px;
     padding-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     color: #181818;
+}
+
+.profile-page .add-review-button {
+    background-color: #181818;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.profile-page .add-review-button:hover {
+    background-color: #333333;
 }
 
 .profile-page .review-form {
