@@ -73,6 +73,16 @@ function ProfilePage() {
         const revs = await apiGetReviews(user_id)
         setReviews(revs) 
       }
+      catch (err) {
+        console.error(err);
+        setUser(null);
+        setIsOwnProfile(false);
+        setLoggedIn(false);
+        setReviews(emptyReviews);
+      } 
+      finally {
+        setLoading(false);
+      }
     }
 
     loadProfile();
