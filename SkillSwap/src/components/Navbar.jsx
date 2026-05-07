@@ -1,8 +1,7 @@
-// after react router done code
-
-import { Link } from "react-router-dom";
-import "./Navbar.css";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "./Navbar.css";
 
 function Navbar() {
   const {user, logout} = useAuth();
@@ -15,7 +14,11 @@ function Navbar() {
         Skill<span>Swap</span>
       </Link>
 
-      <input className="navbar-search" placeholder="Search skills..." />
+        <input
+          className="navbar-search"
+          placeholder="Search skills..."
+          onChange={(event) => setSearch(event.target.value)}
+        />
 
       <div className="navbar-links">
         {/* if the user is logged in, we change our navbar to display logout

@@ -14,8 +14,6 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="SkillSwap API", lifespan=lifespan)
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -28,19 +26,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
 @app.get("/")
 def home():
     return {"message": "API is online"}
-
-
-
-
 # B1 Routers
 app.include_router(auth_router.router)
 app.include_router(users_router.router)
-
 # B2 Routers 
 app.include_router(categories_router.router)
 app.include_router(reviews_router.router)

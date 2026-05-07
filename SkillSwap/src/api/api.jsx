@@ -77,10 +77,10 @@ export async function apiBrowseUsers({search = "", category = "", proficiency = 
     if (search) { // non empty string
         params.append("search", search)  // adds search as a parameter to the call
     }
-    if (category) {
+    if (category && category !== "All categories") {
         params.append("category", category)
     }
-    if (proficiency) {
+    if (proficiency && proficiency !== "All levels") {
         params.append("proficiency", proficiency)
     }
     params.append("page", page)

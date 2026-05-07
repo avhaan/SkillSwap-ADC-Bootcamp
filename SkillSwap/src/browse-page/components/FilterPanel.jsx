@@ -1,6 +1,6 @@
 export default function FilterPanel({category, proficiency, onCategoryChange, onProficiencyChange }){
 const CATEGORIES = [
-  'All categories',
+  '',
   'Technology & Programming',
   'Design & Creative',
   'Music & Arts',
@@ -15,7 +15,7 @@ const CATEGORIES = [
 ]
 
 const PROFICIENCIES = [
-  'All levels',
+  '',
   'Beginner',
   'Intermediate',
   'Advanced',
@@ -34,14 +34,14 @@ const PROFICIENCIES = [
                     /* in here we create a option for each different category,
                        i is our index numbers, and the value cat is what the user sends
                        in. */
-                    <option key={i} value={cat}>{cat}</option>
+                    <option key={i} value={cat}>{cat || 'All categories'}</option>
                 ))}
 
             </select>
 
             <select value = {proficiency} onChange={onProficiencyChange} className="filter-select">
                 {PROFICIENCIES.map((level,i) => (
-                    <option key={i} value={level}>{level}</option>
+                    <option key={i} value={level}>{level || 'All levels'}</option>
                 ))}
             </select>
         </div>
