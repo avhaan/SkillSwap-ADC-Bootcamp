@@ -22,12 +22,12 @@ function ProfileHeader({ profile, isOwnProfile }) {
       <div className="profile-info">
 
         <h1>{profile.name}</h1>
-        <p>{profile.location}</p>
-        <p className="profile-bio">{profile.bio}</p>
+        <p>{profile.location ? profile.location : "Location Not Found"}</p>
+        <p className="profile-bio">{profile.bio ? profile.bio : "Bio Not Found"}</p>
 
         <div className="profile-contact">
-          {contact.show_email && <p>Email: {profile.email}</p>}
-          {contact.show_phone && <p>Phone: {contact.phone}</p>}
+          {profile.contact && contact.show_email && <p>Email: {profile.email}</p>}
+          {profile.contact && contact.show_phone && <p>Phone: {profile.contact.phone}</p>}
         </div>
 
         <div className="profile-action-buttons">

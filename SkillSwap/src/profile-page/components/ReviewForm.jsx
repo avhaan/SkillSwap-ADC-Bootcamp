@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { apiCreateReview } from "../../api/api";
 
-function ReviewForm() {
+function ReviewForm({user_id}) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     // need to insert api here instead of this later
     // this just prints the review to console
-    console.log("Rating:", rating);
-    console.log("Comment:", comment);
+    // console.log("Rating:", rating);
+    // console.log("Comment:", comment);
+
+    // creates a review
+    await apiCreateReview(user_id, rating, comment)
 
     setRating(0);
     setComment("");
