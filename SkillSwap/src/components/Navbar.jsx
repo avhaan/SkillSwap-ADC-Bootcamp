@@ -30,8 +30,7 @@ function Navbar() {
           <>
         {/* If user is not logged in, we have login, register and browse on the navbar.  */}
         <Link to="/browse">Browse</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        <Link to="/login">Login/Register</Link>
         </>
         )}
       </div>
