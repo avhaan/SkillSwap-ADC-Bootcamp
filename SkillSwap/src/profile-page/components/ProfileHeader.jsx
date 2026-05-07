@@ -2,7 +2,6 @@ import LikeButton from "./LikeButton";
 import ContactButton from "./ContactButton";
 
 function ProfileHeader({ profile, isOwnProfile }) {
-  const contact = profile.contact;
 
   return (
     <div className="profile-header">
@@ -24,11 +23,6 @@ function ProfileHeader({ profile, isOwnProfile }) {
         <h1>{profile.name}</h1>
         <p>{profile.location ? profile.location : "Location Not Found"}</p>
         <p className="profile-bio">{profile.bio ? profile.bio : "Bio Not Found"}</p>
-
-        <div className="profile-contact">
-          {profile.contact && contact.show_email && <p>Email: {profile.email}</p>}
-          {profile.contact && contact.show_phone && <p>Phone: {profile.contact.phone}</p>}
-        </div>
 
         <div className="profile-action-buttons">
           {isOwnProfile ? (
