@@ -44,7 +44,6 @@ function ProfilePage() {
           setLoggedIn(true)
         }
         
-
         const revs = await apiGetReviews(user_id)
         setReviews(revs) 
       }
@@ -89,7 +88,7 @@ function ProfilePage() {
   // const isOwnProfile = false;
 
 
-
+/*
   const mockProfile = {
 
     id: "ut101",
@@ -162,12 +161,15 @@ function ProfilePage() {
     }
   ];
 
+  */
+
+
   return (
     <div className="profile-page">
 
       <main className="profile-layout">
         <aside className="profile-sidebar">
-          <ProfileHeader profile={user} isOwnProfile={isOwnProfile} />
+          <ProfileHeader profile={user} isOwnProfile={isOwnProfile}/>
 
           <div className="contact-card">
             <h3>CONTACT INFO</h3>
