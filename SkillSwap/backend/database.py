@@ -18,3 +18,4 @@ matches_collection = db["matches"]
 
 async def create_indexes():
     await users_collection.create_index("email", unique = True)
+    await matches_collection.create_index("pair_key", unique=True)
