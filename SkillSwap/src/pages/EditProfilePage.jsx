@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../edit-profile-page/style.css";
 import BasicInfoForm from "../edit-profile-page/components/BasicInfoForm";
 import OfferedSkillEditor from "../edit-profile-page/components/OfferedSkillEditor";
 import WantedSkillEditor from "../edit-profile-page/components/WantedSkillEditor";
-import { apiGetMe } from "../api/api";
+import { apiGetMe, apiUpdateProfile } from "../api/api";
+
 
 function EditProfilePage() {
+  /*
   const [formData, setFormData] = useState({
     name: "Maya Ramirez",
     location: "College Park, MD",
@@ -29,13 +31,42 @@ function EditProfilePage() {
       },
     ],
     skills_wanted: ["React / JavaScript", "Photography", "French"],
-  });
+  }); 
+  */
 
-  const me = apiGetMe()
-
+  const [formData, setFormData] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   // creates a state variable for the little pill boxes under “Skills wanted”
   const [wantedInput, setWantedInput] = useState("");
+
+  useEffect(() => {
+      async function loadProfile() {
+        try {
+          const me = await apiGetMe()
+          setFormData(me)
+        }
+  
+        catch (err) {
+  
+        }
+  
+        finally {
+          setLoading(false)
+        }
+      }
+
+      loadProfile()
+    }, [])
+
+    // makes the loading screen
+  if (loading) {
+    return (
+      <p>Loading...</p>
+    )
+  }
+
+
 
   // this basically means only change the field I ask you to
   // without changing the rest of the form 
@@ -107,12 +138,15 @@ function EditProfilePage() {
     });
   }
 
-  function handleSave(event) {
+  async function handleSave(event) {
     event.preventDefault();
 
     // place holder right now
     // later we need to add it to the database
-    console.log("Saved profile:", formData);
+    // console.log("Saved profile:", formData);
+
+    console.log(formData)
+    await apiUpdateProfile(formData)
   }
 
   function handleCancel() {

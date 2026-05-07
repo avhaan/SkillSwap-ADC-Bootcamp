@@ -8,10 +8,80 @@ import { useParams } from "react-router-dom";
 import { apiGetMe, apiGetReviews, apiGetUser } from "../api/api.jsx";
 
 function ProfilePage() {
-  const { id } = useParams();
-  const [profile, setProfile] = useState(null);
-  const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // gets the user_id from the url
+  const { user_id } = useParams();
+
+  const [user, setUser] = useState(null)
+  const [isOwnProfile, setIsOwnProfile] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [reviews, setReviews] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(false)
+
+
+  useEffect(() => {
+    async function loadProfile() {
+    try {
+      // checks if using profile/me
+      if (user_id === "me") {
+        const me = await apiGetMe()
+        setUser(me)
+        setIsOwnProfile(true)
+
+        const revs = await apiGetReviews(me._id)
+        setReviews(revs) 
+      }
+
+      // using profile/{user_id}
+      else {
+        const profile = await apiGetUser(user_id)
+        setUser(profile)
+
+        // checks if a user is logged in
+        if (localStorage.getItem("token") !== null) {
+          const me = await apiGetMe()
+          setIsOwnProfile(me?._id === user_id)
+          setLoggedIn(true)
+        }
+        
+
+        const revs = await apiGetReviews(user_id)
+        setReviews(revs) 
+      }
+      
+      
+    }
+
+    catch (err) {
+
+    }
+
+    finally {
+      setLoading(false)
+    }
+  }
+    loadProfile()
+  }, [])
+
+  // displays loading when the api calls are loading
+  if (loading) {
+    return (
+    <p>Loading...</p>
+    )
+  }
+
+
+  if (!user) {
+    return (
+    <p>User does not exist</p>
+    )
+  }
+
+
+
+  
+
+  // when auth exists so this - 
+  
 
   // when auth exists so this -
   // const isOwnProfile = currentUser?.id === profile.id;
@@ -81,12 +151,7 @@ function ProfilePage() {
 
           <section className="reviews-section">
             <h2>Reviews</h2>
-            {!isOwnProfile && (
-              <ReviewForm
-                targetUserId={profile._id}
-                onReviewSaved={loadProfile}
-              />
-            )}
+            {!isOwnProfile && loggedIn && <ReviewForm user_id={user_id}/>}
 
             {reviews.length === 0 ? (
               <p>No reviews yet.</p>
