@@ -16,6 +16,7 @@ function ProfilePage() {
   const [isOwnProfile, setIsOwnProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [reviews, setReviews] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(false)
 
 
   useEffect(() => {
@@ -34,9 +35,15 @@ function ProfilePage() {
       // using profile/{user_id}
       else {
         const profile = await apiGetUser(user_id)
-        const me = await apiGetMe()
         setUser(profile)
-        setIsOwnProfile(me?._id === user_id)
+
+        // checks if a user is logged in
+        if (localStorage.getItem("token") !== null) {
+          const me = await apiGetMe()
+          setIsOwnProfile(me?._id === user_id)
+          setLoggedIn(true)
+        }
+        
 
         const revs = await apiGetReviews(user_id)
         setReviews(revs) 
@@ -185,7 +192,7 @@ function ProfilePage() {
 
           <section className="reviews-section">
             <h2>Reviews</h2>
-            {!isOwnProfile && <ReviewForm user_id={user_id}/>}
+            {!isOwnProfile && loggedIn && <ReviewForm user_id={user_id}/>}
 
             {reviews.reviews.length === 0 ? (
               <p>No reviews yet.</p>

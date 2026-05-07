@@ -8,7 +8,7 @@ function BasicInfoForm({ formData, updateBasicInfo }) {
           <label>Display name</label>
           <input
             type="text"
-            value={formData.name}
+            value={formData.name || ""}
             onChange={(event) =>
               updateBasicInfo("name", event.target.value)
             }
@@ -19,7 +19,7 @@ function BasicInfoForm({ formData, updateBasicInfo }) {
           <label>Location</label>
           <input
             type="text"
-            value={formData.location}
+            value={formData.location || ""}
             onChange={(event) =>
               updateBasicInfo("location", event.target.value)
             }
@@ -30,7 +30,7 @@ function BasicInfoForm({ formData, updateBasicInfo }) {
       <div className="input-group">
         <label>Bio</label>
         <textarea
-          value={formData.bio}
+          value={formData.bio || ""}
           onChange={(event) =>
             updateBasicInfo("bio", event.target.value)
           }
@@ -42,7 +42,7 @@ function BasicInfoForm({ formData, updateBasicInfo }) {
         <input
           type="text"
           placeholder="Paste image URL or leave blank"
-          value={formData.avatar_url}
+          value={formData.avatar_url || ""}
           onChange={(event) =>
             updateBasicInfo("avatar_url", event.target.value)
           }
