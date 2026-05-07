@@ -49,6 +49,11 @@ export function AuthProvider({children}) {
         setUser(updatedUser)
     }
 
+    // returns whether a user is logged in or not
+    function isUserLoggedIn() {
+        return (localStorage.getItem("token") !== null)
+    }
+
     return (
         <AuthContext.Provider value = {{user, token, loading, login, logout, refreshUser}}>
         {children}

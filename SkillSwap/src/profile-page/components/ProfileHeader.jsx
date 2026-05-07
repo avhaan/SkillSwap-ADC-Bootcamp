@@ -1,7 +1,7 @@
 import LikeButton from "./LikeButton";
 import ContactButton from "./ContactButton";
 
-function ProfileHeader({ profile, isOwnProfile }) {
+function ProfileHeader({ profile, isOwnProfile, user_id }) {
 
   return (
     <div className="profile-header">
@@ -31,7 +31,7 @@ function ProfileHeader({ profile, isOwnProfile }) {
             </a>
           ) : (
             <>
-              <LikeButton initialLikes={profile.like_count} />
+              <LikeButton initialLikes={profile.like_count} user_id={profile._id} />
               <ContactButton email={profile.email} />
             </>
           )}
