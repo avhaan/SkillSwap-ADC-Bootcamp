@@ -1,3 +1,8 @@
+import { useState } from "react";
+import "../login-page/style.css";
+import { Link, useNavigate } from "react-router-dom";
+import { apiLogin } from "../api/api";
+import { useAuth } from "../context/AuthContext";
 import {useState} from "react"
 import "../login-page/style.css"
 import {Link, useNavigate} from 'react-router-dom'
@@ -5,6 +10,9 @@ import {useAuth} from "../context/AuthContext.jsx"
 import {apiLogin} from "../api/api"
 
 export default function LoginPage() {
+    const navigate = useNavigate();
+    const { login } = useAuth();
+
     const [form, setForm] = useState({email: "", password: ""})
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
@@ -69,7 +77,7 @@ export default function LoginPage() {
                     <h2>Skill<span>Swap</span></h2>
                 </div>
                 <div className="welcome-text">
-                    <h2>Welcome <span>Back.</span></h2>
+                    <h2>Welcome <span>back.</span></h2>
                 </div>
                 <div className="pick-text">
                     <p>Pick up where you left off.</p>
@@ -77,37 +85,53 @@ export default function LoginPage() {
             </div>
 
             <div className="right-panel">
+              <div className="login-form-container">
                 <div className="sign-in">
-                    <h2>Sign <span>in</span></h2>
+                  <h2>Sign <span>in</span></h2>
                 </div>
 
                 <div className="register">
-                    <h3>New here? <Link to="/register"><span>Create an account</span></Link></h3>
+                  <h3>
+                    New here? <Link to="/register"><span>Create an account</span></Link>
+                  </h3>
                 </div>
 
                 <div className="card">
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label>Email</label>
-                            <input name="email" placeholder="Your Email" value = {form.email} onChange={handleChange}></input>
-                        </div>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input name="password" placeholder="Enter Passwrod" value = {form.password} onChange={handleChange}></input>
-                        </div>
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                      <label>Email</label>
+                        <input
+                          name="email"
+                          placeholder="you@school.edu"
+                          value={form.email}
+                          onChange={handleChange}
+                        />
+                    </div>
 
-                        <button className="submit-button" type="submit">
-                            {loading ? "Loggin in..." : "Log in"}
-                        </button>
-                    </form>
+                    <div className="form-group">
+                      <label>Password</label>
+                        <input
+                          name="password"
+                          type="password"
+                          placeholder="••••••••"
+                          value={form.password}
+                          onChange={handleChange}
+                        />
+                    </div>
+
+                    <button className="submit-button" type="submit">
+                      {loading ? "Logging in..." : "Sign in"}
+                    </button>
+                  </form>
                 </div>
 
-                <div className="error-text">
+                {error && (
+                  <div className="error-text">
                     <p>{error}</p>
-                </div>
-
+                  </div>
+                )}
+              </div>
             </div>
-
 
         </div>
     )

@@ -1,148 +1,190 @@
 .register-page {
-    width: 1198px;
-    height: 580px;
-    min-height: 580px;
-    opacity: 1;
-    display:flex;
-    background-color:  #FDFCF8;
-;
-}   
+    width: 100%;
+    min-height: 100vh;
+    background: #f7f3ee;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
 
 .left-panel {
-    width: 599px;
-    height: 224px;
-    justify-content: space-between;
-    padding-top: 48px;
-    padding-right: 40px;
-    padding-bottom: 48px;
-    padding-left: 40px;
-    gap: 357.2200012207031;
-    opacity: 1;
-    background: #1A1816;
-
+    width: 100%;
+    height: 330px;
+    background-color: #181818;
+    padding: 60px 70px;
 }
 
 .right-panel {
-    width: 599px;
-    height: 580px;
-    padding-top: 104.5px;
-    padding-right: 56px;
-    padding-bottom: 104.5px;
-    padding-left: 56px;
-    opacity: 1;
-    left: 599px;
-    background: #FFFFFF;
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px;
 }
 
-.skill-swap {
-    font-family: font family/Font 1;
-    font-weight: 700;
-    font-style: Bold;
-    font-size: 22px;
-    line-height: 50%;
-    letter-spacing: 0%;
-    vertical-align: middle;
-    width: 519;
+/* ====================
+   Left Side
+   ==================== */
 
-    height: 27px;
-    opacity: 1px;
-    color: #FFFFFF;
-    
+.skill-swap {
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 18px;
+}
+
+.skill-swap h2 {
+    font-size: 40px;
 }
 
 .trade-text {
-    width: 519px;
-    height: 73px;
-    opacity: 1;
-    color: #FFFFFF;
-    font-size: 25px;
-    line-height: 120%;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.15;
+}
 
-    
+.trade-text h1 {
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 28px;
 }
 
 .own-text {
-    color: #A8A39C;
-    font-family: font family/Font 1;
+    color: #a8a39c;
+    font-family: "Inter", sans-serif;
     font-weight: 400;
-    font-style: Regular;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    vertical-align: middle;
-    width: 519px;
-    height: 16px;
-    opacity: 1;
+    font-size: 13px;
+}
+
+.own-text p {
+    color: #a8a39c;
+    font-family: "Inter", sans-serif;
+    font-weight: 100;
+    font-size: 17px;
 }
 
 .register-page span {
-    color: #e35d2b;
+    color: #e95724;
 }
 
-.sign-in {
-    width: 487px;
-    height: 45px;
-    padding-bottom: 28px;
-    opacity: 1;
+/* ====================
+   Right Side
+   ==================== */
+
+.register-form-container {
+    width: 100%;
+    max-width: 520px;
+}
+
+.register-header h1 {
+    font-family: "Inter", sans-serif;
+    font-size: 36px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #181818;
+}
+
+.register-header {
+    margin-bottom: 44px;
+}
+
+.register-header p {
+    font-size: 16px;
+    font-weight: 50;
+    color: #6b625b;
 }
 
 .signin-link {
+    color: #e95724;
+    font-weight: 50;
     text-decoration: underline;
-    color: #e35d2b;
 }
+
+.register-form {
+    width: 100%;
+}
+
 .form-group {
-    width: 487px;
-    height: 79px;
-    padding-bottom: 18px;
-    opacity: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
-
+    gap: 8px;
+    margin-bottom: 24px;
 }
 
-input {
-    width: 487px;
-    height: 39px;
-    border-radius: 8px;
-    border-width: stroke weight/1;
-    padding-top: 10px;
-    padding-right: 14px;
-    padding-bottom: 10px;
-    padding-left: 14px;
-    opacity: 1;
+.form-group label {
+    font-size: 16px;
+    font-weight: 400;
+    color: #181818;
+}
+
+.form-group input {
+    width: 100%;
+    height: 56px;
+    border: 1px solid #d8cfc4;
+    border-radius: 10px;
+    padding: 0 18px;
+    font-size: 16px;
+    font-family: inherit;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+    color: #7a746d;
 }
 
 .submit-button {
-    width: 487px;
-    height: 41px;
-    border-radius: 8px;
-    opacity: 1;
-    padding: 12px;
-    background-color: #1A1816;
-    color: #FFFFFF;
+    width: 100%;
+    height: 62px;
+    background-color: #181818;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
+.submit-button:hover {
+    background-color: #333333;
+}
 
-label {
-    font-size: 14px;
+.submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .error-text {
-    margin-top: 10px;
+    margin-top: 18px;
     font-size: 15px;
+    color: #e95724;
 }
 
-.register span {
-    text-decoration: underline;
-    color:#e35d2b
-}
+/* ====================
+   Responsive
+   ==================== */
 
-.register {
-    font-family: font family/Font 1;
-    font-weight: font weight/400;
-    font-style: Regular;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    vertical-align: middle;
+@media (max-width: 900px) {
+    .register-page {
+        grid-template-columns: 1fr;
+    }
+
+    .left-panel {
+        height: auto;
+    }
+
+    .right-panel {
+        min-height: auto;
+        padding: 48px 28px;
+    }
 }
