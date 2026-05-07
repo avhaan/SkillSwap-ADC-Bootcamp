@@ -15,6 +15,5 @@ reviews_collection = db["reviews"]
 likes_collection = db["likes"]
 
 
-
 async def create_indexes():
     await users_collection.create_index("email", unique = True)

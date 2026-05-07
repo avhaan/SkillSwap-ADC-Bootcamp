@@ -1,6 +1,6 @@
-// after react router done code
-
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Navbar.css";
 import { useAuth } from "../context/AuthContext";
 
@@ -15,7 +15,14 @@ function Navbar() {
         Skill<span>Swap</span>
       </Link>
 
-      <input className="navbar-search" placeholder="Search skills..." />
+      <form className="navbar-search-form" onSubmit={handleSearch}>
+        <input
+          className="navbar-search"
+          placeholder="Search skills..."
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+      </form>
 
       <div className="navbar-links">
         {user ? (
