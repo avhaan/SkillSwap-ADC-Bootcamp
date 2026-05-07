@@ -21,14 +21,25 @@ function OfferedSkillEditor({
             }
           />
 
-          <input
-            type="text"
+          <select
             value={skill.category}
-            placeholder="Category"
             onChange={(event) =>
               updateOfferedSkill(index, "category", event.target.value)
             }
-          />
+          >
+            <option value="">Select category</option>
+            <option value="Technology & Programming">Technology & Programming</option>
+            <option value="Design & Creative">Design & Creative</option>
+            <option value="Music & Arts">Music & Arts</option>
+            <option value="Language & Writing">Language & Writing</option>
+            <option value="Cooking & Food">Cooking & Food</option>
+            <option value="Fitness & Sports">Fitness & Sports</option>
+            <option value="Academic Tutoring">Academic Tutoring</option>
+            <option value="Trades & DIY">Trades & DIY</option>
+            <option value="Business & Finance">Business & Finance</option>
+            <option value="Photography & Video">Photography & Video</option>
+            <option value="Other">Other</option>
+          </select>
 
           <select
             value={skill.proficiency}
