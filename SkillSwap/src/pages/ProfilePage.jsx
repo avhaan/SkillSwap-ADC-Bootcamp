@@ -72,8 +72,13 @@ function ProfilePage() {
         
         const revs = await apiGetReviews(user_id)
         setReviews(revs) 
-      }
+      } catch (error) {
+      console.error("Failed to load profile:", error);
+    } finally {
+      setLoading(false);
     }
+      
+    } 
 
     loadProfile();
   }, [isMeRoute, user_id]);
