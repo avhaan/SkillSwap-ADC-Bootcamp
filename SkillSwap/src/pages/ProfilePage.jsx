@@ -1,172 +1,106 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { apiGetMe, apiGetReviews, apiGetUser } from "../api/api";
 import ProfileHeader from "../profile-page/components/ProfileHeader";
 import SkillList from "../profile-page/components/SkillList";
 import ReviewCard from "../profile-page/components/ReviewCard";
 import ReviewForm from "../profile-page/components/ReviewForm";
-import LikeButton from "../profile-page/components/LikeButton";
 import "../profile-page/style.css";
-import { useParams } from "react-router-dom";
-import { apiGetMe, apiGetReviews, apiGetUser } from "../api/api";
-import { useEffect, useState } from "react";
+
+const emptyReviews = { reviews: [], average_rating: null, total: 0 };
 
 function ProfilePage() {
-  // gets the user_id from the url
   const { user_id } = useParams();
+  const isMeRoute = !user_id || user_id === "me";
 
-  const [user, setUser] = useState(null)
-  const [isOwnProfile, setIsOwnProfile] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [reviews, setReviews] = useState(null)
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState(null);
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState(emptyReviews);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
 
+  async function refreshReviews(targetUserId) {
+    const revs = await apiGetReviews(targetUserId);
+    setReviews(revs);
+  }
 
   useEffect(() => {
     async function loadProfile() {
-    try {
-      // checks if using profile/me
-      if (user_id === "me") {
-        const me = await apiGetMe()
-        setUser(me)
-        setIsOwnProfile(true)
+      await Promise.resolve();
 
-        const revs = await apiGetReviews(me._id)
-        setReviews(revs) 
-      }
+      setLoading(true);
+      setShowReviewForm(false);
+      setReviews(emptyReviews);
 
-      // using profile/{user_id}
-      else {
-        const profile = await apiGetUser(user_id)
-        setUser(profile)
+      try {
+        if (isMeRoute) {
+          if (!localStorage.getItem("token")) {
+            setUser(null);
+            setIsOwnProfile(false);
+            setLoggedIn(false);
+            return;
+          }
 
-        // checks if a user is logged in
-        if (localStorage.getItem("token") !== null) {
-          const me = await apiGetMe()
-          setIsOwnProfile(me?._id === user_id)
-          setLoggedIn(true)
+          const me = await apiGetMe();
+          setUser(me);
+          setIsOwnProfile(true);
+          setLoggedIn(true);
+          await refreshReviews(me._id);
+          return;
+        }
+
+        const profile = await apiGetUser(user_id);
+        if (!profile?._id) {
+          throw new Error("User not found");
+        }
+
+        setUser(profile);
+        setIsOwnProfile(false);
+        setLoggedIn(false);
+
+        if (localStorage.getItem("token")) {
+          try {
+            const me = await apiGetMe();
+            setIsOwnProfile(me?._id === profile._id);
+            setLoggedIn(Boolean(me));
+          } catch {
+            setIsOwnProfile(false);
+            setLoggedIn(false);
+          }
         }
         
         const revs = await apiGetReviews(user_id)
         setReviews(revs) 
       }
-      
-      
     }
 
-    catch (err) {
+    loadProfile();
+  }, [isMeRoute, user_id]);
 
-    }
-
-    finally {
-      setLoading(false)
-    }
-  }
-    loadProfile()
-  }, [])
-
-  // displays loading when the api calls are loading
   if (loading) {
-    return (
-    <p>Loading...</p>
-    )
+    return <p>Loading...</p>;
   }
-
 
   if (!user) {
     return (
-    <p>User does not exist</p>
-    )
+      <div className="profile-page">
+        <main className="profile-layout profile-message-layout">
+          <section className="profile-message">
+            <p>{isMeRoute ? "Log in to view your profile." : "User does not exist."}</p>
+            {isMeRoute && (
+              <Link className="add-review-button" to="/login">
+                Log in
+              </Link>
+            )}
+          </section>
+        </main>
+      </div>
+    );
   }
-
-
-
-  
-
-  // when auth exists so this - 
-  
-
-  // const isOwnProfile = currentUser?.id === profile.id;
-  // const isOwnProfile = isSelf(user_id)
-  // const isOwnProfile = false;
-
-
-/*
-  const mockProfile = {
-
-    id: "ut101",
-    name: "Maya Ramirez",
-    avatar_url: "",
-    location: "College Park, MD",
-    email: "maya.r@umd.edu",
-
-    bio: "Linguist by training, guitarist by accident. Always trading languages for new music.",
-    like_count: 24,
-   
-    contact: {
-      display_email: true,
-      phone: "(301) 555-0142",
-      display_phone: true
-    },
-
-    skills_offered: [
-      {
-        name: "Spanish (conversational + written)",
-        category: "Language & Writing",
-        proficiency: "Expert",
-        description: "Native speaker, 6 years tutoring undergrads. Comfortable with grammar drills, conversation, or DELE prep."
-      },
-      {
-        name: "Acoustic Guitar",
-        category: "Music & Arts",
-        proficiency: "Intermediate",
-        description: "Self-taught for 8 years. Can teach chords, basic fingerstyle, and how to play along to songs."
-      },
-      {
-        name: "Knitting",
-        category: "Trades & DIY",
-        proficiency: "Beginner",
-        description: "Learning alongside you — happy to swap a beginner-level lesson if you want a casual study buddy."
-      }
-    ],
-
-    skills_wanted: [
-      {
-        name: "React/ JavaScript",
-        category: "Technology & Programming"
-      },
-      {
-        name: "Photography Basics",
-        category: "Photography & Video"
-      },
-      {
-        name: "French",
-        category: "Language & Writing"
-      }
-    ]
-
-  };
-
-  const mockReviews = [
-    {
-      id: "r1",
-      reviewer_name: "Jamie Chen",
-      rating: 5,
-      comment: "Maya explained Python in a very simple and practical way. Super helpful!",
-      created_at: "2026-04-20"
-    },
-    {
-      id: "r2",
-      reviewer_name: "Morgan Lee",
-      rating: 4,
-      comment: "Great teacher and very patient during the knitting session.",
-      created_at: "2026-04-22"
-    }
-  ];
-
-  */
-
 
   return (
     <div className="profile-page">
-
       <main className="profile-layout">
         <aside className="profile-sidebar">
           <ProfileHeader profile={user} isOwnProfile={isOwnProfile}/>
@@ -181,7 +115,7 @@ function ProfilePage() {
 
             <div className="contact-row">
               <span>Phone</span>
-              <p>{(user.contact && user.contact.phone) ? user.contact.phone : "Unknown"}</p>
+              <p>{user.contact?.phone ? user.contact.phone : "Unknown"}</p>
             </div>
           </div>
         </aside>
@@ -193,8 +127,35 @@ function ProfilePage() {
           />
 
           <section className="reviews-section">
-            <h2>Reviews</h2>
-            {!isOwnProfile && loggedIn && <ReviewForm user_id={user_id}/>}
+            <div className="reviews-header">
+              <h2>Reviews</h2>
+
+              {!isOwnProfile && loggedIn && !showReviewForm && (
+                <button
+                  type="button"
+                  className="add-review-button"
+                  onClick={() => setShowReviewForm(true)}
+                >
+                  Add review
+                </button>
+              )}
+
+              {!isOwnProfile && !loggedIn && (
+                <Link className="add-review-button" to="/login">
+                  Log in to review
+                </Link>
+              )}
+            </div>
+
+            {!isOwnProfile && loggedIn && showReviewForm && (
+              <ReviewForm
+                targetUserId={user._id}
+                onReviewSaved={() => {
+                  setShowReviewForm(false);
+                  refreshReviews(user._id);
+                }}
+              />
+            )}
 
             {reviews.reviews.length === 0 ? (
               <p>No reviews yet.</p>
@@ -205,7 +166,6 @@ function ProfilePage() {
             )}
           </section>
         </section>
-        
       </main>
     </div>
   );

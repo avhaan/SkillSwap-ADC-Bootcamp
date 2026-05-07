@@ -13,7 +13,7 @@ db = client.skillswap
 users_collection = db["users"]
 reviews_collection = db["reviews"]
 likes_collection = db["likes"]
-
+matches_collection = db["matches"]
 
 
 async def create_indexes():
