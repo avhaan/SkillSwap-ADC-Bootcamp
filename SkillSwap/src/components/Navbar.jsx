@@ -22,8 +22,6 @@ function Navbar() {
             and the profile of the user. */}
         {user ? (
           <>
-             
-             <button onClick={logout} className="navbar-logout">Logout</button>
              <Link to={`/profile/${user._id}`}>
              <div className="navbar-avatar">{initials}</div>
              </Link>
