@@ -25,14 +25,24 @@ def _validate_current_user_id(user_id: str) -> ObjectId:
 # Takes data from MongoDB and returns in clean format
 def _review_to_public(review: dict) -> ReviewPublic:
     review_dict = doc_to_dict(review)
+    def format_dt(dt):
+        # %B = Full Month (capitalized), %Y = Year, %M = Minute, %p = am/pm
+        # Using a platform-independent way to strip leading zeros from Day (%d) and Hour (%I)
+        
+        # If on Windows, use %#d and %#I
+        fmt = dt.strftime("%B %#d, %Y, %#I:%M %p")
+        
+        # This handles "pm" to "pm" while keeping "May" capitalized
+        return fmt.replace("AM", "am").replace("PM", "pm")
+
     return ReviewPublic(
         id=review_dict["id"],
         reviewer_id=review_dict["reviewer_id"],
         reviewer_name=review_dict["reviewer_name"],
         rating=review_dict["rating"],
         comment=review_dict["comment"],
-        created_at=review_dict["created_at"],
-        updated_at=review_dict["updated_at"],
+        created_at=format_dt(review_dict["created_at"]),
+        updated_at=format_dt(review_dict["updated_at"]),
     )
 
 # looks up all reviews for a user, calculates avg rating and total number of reviews, and returns a list of reviews sorted by newest first

@@ -150,8 +150,8 @@ class ReviewPublic(BaseModel):
     reviewer_name: str
     rating: int
     comment: str
-    created_at: datetime
-    updated_at: datetime
+    created_at: str
+    updated_at: str
 
 
 class ReviewsResponse(BaseModel):
