@@ -3,15 +3,9 @@ import "../login-page/style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { apiLogin } from "../api/api";
 import { useAuth } from "../context/AuthContext";
-import {useState} from "react"
-import "../login-page/style.css"
-import {Link, useNavigate} from 'react-router-dom'
-import {useAuth} from "../context/AuthContext.jsx"
-import {apiLogin} from "../api/api"
+
 
 export default function LoginPage() {
-    const navigate = useNavigate();
-    const { login } = useAuth();
 
     const [form, setForm] = useState({email: "", password: ""})
     const [loading, setLoading] = useState(false)
