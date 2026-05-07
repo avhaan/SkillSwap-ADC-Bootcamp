@@ -1,6 +1,8 @@
 // Displays avatar, name, location, top 3 skills, and like count
 
 import SkillBadge from './SkillBadge'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function SkillCard({ user }) {
 
@@ -9,7 +11,7 @@ export default function SkillCard({ user }) {
   // grabs the first index and joins the two together into one string and we get
   // DB
   const initials = user.name.split(' ').map(n => n[0]).join('')
-
+  const navigate = useNavigate()
   return (
     <div className="skill-card" onClick={() => navigate(`/profile/${user._id}`)}>
 
@@ -34,9 +36,9 @@ export default function SkillCard({ user }) {
         {/* this grabs the first 3 skills from the users skill bank and
             maps each one into a Skill Badge component with i as the index
             which is used as a key. */}
-        {user.skills_offered.slice(0, 3).map((skill, i) => (
+        {(user.skills_offered || []).slice(0, 3).map((skill, i) => (
           <SkillBadge key={i} skill={skill.name} level={skill.proficiency} />
-        ))}
+        ))} 
       </div>
 
       {/* this is the like count of our user.*/}

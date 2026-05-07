@@ -49,10 +49,10 @@ export default function BrowsePage() {
     setLoading(false)
   }
 
-  // anytime the page changes we fetch our users.
+  // anytime the page, category or proficiency changes we fetch our users.
   useEffect(() => {
     fetchUsers()
-  }, [page])
+  }, [page, category, proficiency])
 
   // runs when user clicks search button
   function handleSearch() {

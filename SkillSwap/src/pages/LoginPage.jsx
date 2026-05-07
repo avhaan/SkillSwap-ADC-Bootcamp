@@ -3,6 +3,11 @@ import "../login-page/style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { apiLogin } from "../api/api";
 import { useAuth } from "../context/AuthContext";
+import {useState} from "react"
+import "../login-page/style.css"
+import {Link, useNavigate} from 'react-router-dom'
+import {useAuth} from "../context/AuthContext.jsx"
+import {apiLogin} from "../api/api"
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -11,6 +16,8 @@ export default function LoginPage() {
     const [form, setForm] = useState({email: "", password: ""})
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
+    const {login} = useAuth() // gets the login method from the AuthContext file
+    const navigate = useNavigate()
 
     function handleChange(e) {
         setForm(f => ({...f, [e.target.name]: e.target.value}))
@@ -20,6 +27,11 @@ export default function LoginPage() {
         e.preventDefault()
 
         setError("")
+
+        if (!form.email.trim() || !form.password.trim()) { // one of the fields is not filled in
+            setError("Please enter both fields")
+            return
+        }   
 
         // makes the button show that the log in is loading
         setLoading(true)
@@ -32,9 +44,18 @@ export default function LoginPage() {
                 headers: {Authorization: `Bearer ${access_token}`}  
             })
 
-            const me = await res.json() // turns the result into a json
-            login(access_token, me) // logs in the user on the frontend
-            navigate("/browse") // navigates to the browse page
+            // checks if the api call succeeded in finding the user's profile
+            // if it does not work, then 
+            if (!res.ok) {
+                setError("Incorrect username or password")
+            }
+
+            // the login is valid on the backend
+            else {
+                const me = await res.json() // turns the result into a json
+                login(access_token, me) // logs in the user on the frontend
+                navigate("/browse") // navigates to the browse page
+            }
         }
         
         catch (err) {
