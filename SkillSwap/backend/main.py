@@ -3,13 +3,18 @@ from .routers import auth_router, users_router, categories_router, reviews_route
 from contextlib import asynccontextmanager
 from .database import create_indexes
 from fastapi.middleware.cors import CORSMiddleware
+import asyncio
 
 
 
 # basically takes care of startup code, makes sure indexes are created for email for users
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await create_indexes()
+    try:
+        await asyncio.wait_for(create_indexes(), timeout=5)
+    except Exception as e:
+        print(f"Startup warning: {e}")
+        print("Skipping index creation for now")
     yield
 
 
