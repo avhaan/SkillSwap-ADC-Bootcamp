@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-from .routers import auth_router, users_router, categories_router, reviews_router, likes_router
-
+from .routers import auth_router, users_router, categories_router, reviews_router, likes_router, matches_router
 from contextlib import asynccontextmanager
 from .database import create_indexes
 from fastapi.middleware.cors import CORSMiddleware
@@ -37,3 +36,4 @@ app.include_router(users_router.router)
 app.include_router(categories_router.router)
 app.include_router(reviews_router.router)
 app.include_router(likes_router.router)
+app.include_router(matches_router.router)
