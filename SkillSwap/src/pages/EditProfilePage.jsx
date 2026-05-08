@@ -47,7 +47,11 @@ function EditProfilePage() {
       async function loadProfile() {
         try {
           const me = await apiGetMe()
-          setFormData(me)
+          setFormData({
+            ...me,
+            skills_offered: me.skills_offered || [],
+            skills_wanted: me.skills_wanted || [],
+          })
         }
   
         catch (err) {
@@ -103,6 +107,7 @@ function EditProfilePage() {
           name: "",
           category: "",
           proficiency: "Beginner",
+          description: "",
         },
       ],
     });
@@ -125,7 +130,13 @@ function EditProfilePage() {
 
       setFormData({
         ...formData,
-        skills_wanted: [...formData.skills_wanted, wantedInput.trim()],
+        skills_wanted: [
+          ...formData.skills_wanted,
+          {
+            name: wantedInput.trim(),
+            category: "Other",
+          },
+        ],
       });
 
       setWantedInput("");

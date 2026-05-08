@@ -5,14 +5,22 @@ function WantedSkillEditor({
   addWantedSkill,
   removeWantedSkill,
 }) {
+  function getSkillName(skill) {
+    if (typeof skill === "string") {
+      return skill;
+    }
+
+    return skill?.name || skill?.skill || skill?.title || "Skill";
+  }
+
   return (
     <section className="edit-card">
       <h2>Skills wanted</h2>
 
       <div className="wanted-skill-list">
-        {skillsWanted.map((skill, index) => (
+        {(skillsWanted || []).map((skill, index) => (
           <div className="wanted-skill-tag" key={index}>
-            <span>{skill}</span>
+            <span>{getSkillName(skill)}</span>
 
             <button
               type="button"
