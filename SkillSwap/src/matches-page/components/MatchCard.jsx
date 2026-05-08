@@ -8,7 +8,7 @@ function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
     navigate(`/profile/${match.otherId}`);
   }
 
-  function stopCardClick(event) {
+  function stopClick(event) {
     event.stopPropagation();
   }
 
@@ -38,7 +38,7 @@ function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
             <Link
               to={`/profile/${match.otherId}`}
               className="primary-match-button"
-              onClick={stopCardClick}
+              onClick={stopClick}
             >
               Open profile
             </Link>
@@ -46,7 +46,7 @@ function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
             <a
               href={`mailto:${match.email || ""}`}
               className="secondary-match-button"
-              onClick={stopCardClick}
+              onClick={stopClick}
             >
               Contact
             </a>
@@ -55,7 +55,7 @@ function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
               type="button"
               className="secondary-match-button"
               onClick={(event) => {
-                stopCardClick(event);
+                stopClick(event);
                 onCancel(match.otherId);
               }}
             >
@@ -70,7 +70,7 @@ function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
               type="button"
               className="accept-button"
               onClick={(event) => {
-                stopCardClick(event);
+                stopClick(event);
                 onAccept(match.id);
               }}
             >
@@ -81,7 +81,7 @@ function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
               type="button"
               className="secondary-match-button"
               onClick={(event) => {
-                stopCardClick(event);
+                stopClick(event);
                 onDecline(match.id);
               }}
             >
@@ -92,7 +92,7 @@ function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
 
         {type === "sent" && (
           <>
-            <button type="button" className="disabled-match-button" disabled onClick={stopCardClick}>
+            <button type="button" className="disabled-match-button" disabled>
               Request sent
             </button>
 
@@ -100,7 +100,7 @@ function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
               type="button"
               className="secondary-match-button"
               onClick={(event) => {
-                stopCardClick(event);
+                stopClick(event);
                 onCancel(match.otherId);
               }}
             >

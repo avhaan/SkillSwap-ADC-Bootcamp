@@ -180,3 +180,17 @@
   font-size: 13px;
   font-weight: 700;
 }
+
+@media (max-width: 900px) {
+  .matches-container {
+    padding: 26px 20px 60px;
+  }
+
+  .match-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .match-card {
+    width: 100%;
+  }
+}

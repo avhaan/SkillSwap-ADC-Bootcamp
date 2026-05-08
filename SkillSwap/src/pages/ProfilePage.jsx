@@ -65,7 +65,6 @@ function ProfilePage() {
             const me = await apiGetMe();
             setIsOwnProfile(me?._id === profile._id);
             setLoggedIn(Boolean(me));
-
             if (me?._id === profile._id) {
               setMatchStatus("self");
             } else {

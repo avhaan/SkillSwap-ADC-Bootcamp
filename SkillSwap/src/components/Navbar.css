@@ -83,6 +83,14 @@
     color: white;
 }
 
+.navbar-auth-button:hover {
+    background-color: #f5f0e8;
+}
+
+.navbar-auth-button.primary:hover {
+    background-color: #333333;
+}
+
 @media (max-width: 800px) {
     .navbar {
         padding: 0 20px;

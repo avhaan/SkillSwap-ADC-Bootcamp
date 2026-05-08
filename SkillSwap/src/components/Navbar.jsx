@@ -21,7 +21,6 @@ function Navbar() {
     }
   }
 
-
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo">
@@ -40,18 +39,20 @@ function Navbar() {
       <div className="navbar-links">
         {user ? (
           <>
-             <Link to="/browse">Browse</Link>
-             <Link to="/matches">Matches</Link>
-             <Link to="/profile/me" className="navbar-avatar" aria-label="My profile">
-               {initials}
-             </Link>
+            <Link to="/browse">Browse</Link>
+            <Link to="/matches">Matches</Link>
+            <Link to="/profile/me" className="navbar-avatar" aria-label="My profile">
+              {initials}
+            </Link>
           </>
         ) : (
           <>
-        <Link to="/browse">Browse</Link>
-        <Link to="/login">Matches</Link>
-        <Link to="/login" className="navbar-auth-button primary">Login/Register</Link>
-        </>
+            <Link to="/browse">Browse</Link>
+            <Link to="/login">Matches</Link>
+            <Link to="/login" className="navbar-auth-button primary">
+              Login/Register
+            </Link>
+          </>
         )}
       </div>
     </nav>

@@ -10,7 +10,7 @@ export default function SkillCard({ user }) {
   // it basically breaks the arrays up into two, so like David and Bowie then
   // grabs the first index and joins the two together into one string and we get
   // DB
-  const initials = user.name.split(' ').map(n => n[0]).join('')
+  const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase()
   const navigate = useNavigate()
   return (
     <div className="skill-card" onClick={() => navigate(`/profile/${user._id}`)}>

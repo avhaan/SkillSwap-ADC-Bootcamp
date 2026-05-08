@@ -259,6 +259,10 @@
     font-size: 16px;
 }
 
+.profile-page .profile-logout-button:hover {
+    background-color: #f5f0e8;
+}
+
 .profile-page .match-request-button,
 .profile-page .match-login-link {
     width: 100%;
