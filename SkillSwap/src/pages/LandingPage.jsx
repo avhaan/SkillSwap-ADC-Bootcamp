@@ -19,7 +19,7 @@ export default function LandingPage() {
 
           <div className="landing-actions">
             <Link to="/register" className="landing-btn primary">
-              Get started <span>→</span>
+              Get started →
             </Link>
 
             <Link to="/browse" className="landing-btn secondary">

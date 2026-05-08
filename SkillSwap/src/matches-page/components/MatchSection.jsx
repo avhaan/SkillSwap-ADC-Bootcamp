@@ -1,6 +1,6 @@
 import MatchCard from "./MatchCard";
 
-function MatchSection({ title, accent, countText, matches, type }) {
+function MatchSection({ title, accent, countText, matches, type, onAccept, onDecline, onCancel }) {
   return (
     <section className="match-section">
       <div className="match-section-header">
@@ -16,7 +16,14 @@ function MatchSection({ title, accent, countText, matches, type }) {
           <p className="empty-match-text">Nothing here yet.</p>
         ) : (
           matches.map((match) => (
-            <MatchCard key={match.id} match={match} type={type} />
+            <MatchCard
+              key={match.id}
+              match={match}
+              type={type}
+              onAccept={onAccept}
+              onDecline={onDecline}
+              onCancel={onCancel}
+            />
           ))
         )}
       </div>

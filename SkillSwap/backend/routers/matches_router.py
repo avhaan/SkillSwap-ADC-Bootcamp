@@ -152,8 +152,26 @@ async def decline_match(
     return {"message": "Match request declined"}
 
 
+@router.delete("/{user_id}")
+async def cancel_or_unmatch(
+    user_id: str,
+    current_user_id: str = Depends(get_current_user_id)
+):
+    if user_id == current_user_id:
+        return {"error": "You cannot cancel a match with yourself"}
 
+    pair_key = make_pair_key(current_user_id, user_id)
+    match = await matches_collection.find_one({"pair_key": pair_key})
 
+    if match is None:
+        return {"error": "Match not found"}
+
+    if match["status"] == "pending" and match["requester_id"] != current_user_id:
+        return {"error": "Only the requester can cancel this pending request"}
+
+    await matches_collection.delete_one({"_id": match["_id"]})
+
+    return {"message": "Match removed"}
 
 
 @router.get("/{user_id}/status")
@@ -182,5 +200,4 @@ async def get_match_status(
             return {"status": "pending_received"}
 
     return {"status": match["status"]}
-
 

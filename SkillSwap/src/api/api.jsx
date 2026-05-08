@@ -191,11 +191,11 @@ export async function apiGetCategories() {
     return handleResponse(res)
 }
 
-// MATCH ENPOINTS
+// MATCH ENDPOINTS
 
 // sends a match request from the current logged in user to userID
-export async function apiSendMatchRequest(matchID) {
-    const res = await fetch(`${BASE}/api/matches/${matchID}`, {
+export async function apiSendMatchRequest(userID) {
+    const res = await fetch(`${BASE}/api/matches/${userID}`, {
         method: "POST",
         headers: authHeaders()
     })
@@ -203,8 +203,7 @@ export async function apiSendMatchRequest(matchID) {
     return handleResponse(res)
 }
 
-
-// gets all of the users that the current logged in user has matched with
+// gets current, incoming, and sent matches for the logged in user
 export async function apiGetMyMatches() {
     const res = await fetch(`${BASE}/api/matches/me`, {
         method: "GET",
@@ -224,23 +223,32 @@ export async function apiAcceptMatch(matchID) {
     return handleResponse(res)
 }
 
-// declines a match request w/ ID matchID
+// declines a match request with matchID
 export async function apiDeclineMatch(matchID) {
-  const res = await fetch(`${BASE}/api/matches/${matchID}/decline`, {
-    method: "PUT",
-    headers: authHeaders(),
-  });
+    const res = await fetch(`${BASE}/api/matches/${matchID}/decline`, {
+        method: "PUT",
+        headers: authHeaders()
+    })
 
-  return handleResponse(res);
+    return handleResponse(res)
 }
 
-// gets the status of a match request with logged in user and user with ID userID
+// cancels a pending request or removes an accepted match with userID
+export async function apiCancelOrUnmatch(userID) {
+    const res = await fetch(`${BASE}/api/matches/${userID}`, {
+        method: "DELETE",
+        headers: authHeaders()
+    })
+
+    return handleResponse(res)
+}
+
+// checks match status between logged in user and userID
 export async function apiGetMatchStatus(userID) {
-  const res = await fetch(`${BASE}/api/matches/${userID}/status`, {
-    method: "GET",
-    headers: authHeaders(),
-  });
+    const res = await fetch(`${BASE}/api/matches/${userID}/status`, {
+        method: "GET",
+        headers: authHeaders()
+    })
 
-  return handleResponse(res);
+    return handleResponse(res)
 }
-

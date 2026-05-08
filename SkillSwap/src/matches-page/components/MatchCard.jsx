@@ -1,32 +1,30 @@
+import { Link, useNavigate } from "react-router-dom";
 import MatchStatusBadge from "./MatchStatusBadge";
 
-function MatchCard({ match, type }) {
-  function getAvatarClass() {
-    if (match.avatarColor === "purple") {
-      return "match-avatar purple";
-    }
+function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
+  const navigate = useNavigate();
 
-    if (match.avatarColor === "gold") {
-      return "match-avatar gold";
-    }
+  function openProfile() {
+    navigate(`/profile/${match.otherId}`);
+  }
 
-    if (match.avatarColor === "blue") {
-      return "match-avatar blue";
-    }
-
-    return "match-avatar green";
+  function stopClick(event) {
+    event.stopPropagation();
   }
 
   return (
-    <article className={`match-card ${type === "incoming" ? "incoming-card" : ""}`}>
+    <article
+      className={`match-card ${type === "incoming" ? "incoming-card" : ""}`}
+      onClick={openProfile}
+    >
       <div className="match-card-top">
-        <div className={getAvatarClass()}>
+        <div className="match-avatar">
           {match.initials}
         </div>
 
         <div className="match-person-info">
           <h3>{match.name}</h3>
-          <p>{match.location}</p>
+          <p>{match.location || "Location not listed"}</p>
         </div>
       </div>
 
@@ -37,23 +35,56 @@ function MatchCard({ match, type }) {
       <div className="match-actions">
         {type === "matched" && (
           <>
-            <button type="button" className="primary-match-button">
+            <Link
+              to={`/profile/${match.otherId}`}
+              className="primary-match-button"
+              onClick={stopClick}
+            >
               Open profile
-            </button>
+            </Link>
 
-            <button type="button" className="secondary-match-button">
+            <a
+              href={`mailto:${match.email || ""}`}
+              className="secondary-match-button"
+              onClick={stopClick}
+            >
               Contact
+            </a>
+
+            <button
+              type="button"
+              className="secondary-match-button"
+              onClick={(event) => {
+                stopClick(event);
+                onCancel(match.otherId);
+              }}
+            >
+              Unmatch
             </button>
           </>
         )}
 
         {type === "incoming" && (
           <>
-            <button type="button" className="accept-button">
+            <button
+              type="button"
+              className="accept-button"
+              onClick={(event) => {
+                stopClick(event);
+                onAccept(match.id);
+              }}
+            >
               Accept
             </button>
 
-            <button type="button" className="secondary-match-button">
+            <button
+              type="button"
+              className="secondary-match-button"
+              onClick={(event) => {
+                stopClick(event);
+                onDecline(match.id);
+              }}
+            >
               Decline
             </button>
           </>
@@ -65,7 +96,14 @@ function MatchCard({ match, type }) {
               Request sent
             </button>
 
-            <button type="button" className="secondary-match-button">
+            <button
+              type="button"
+              className="secondary-match-button"
+              onClick={(event) => {
+                stopClick(event);
+                onCancel(match.otherId);
+              }}
+            >
               Cancel
             </button>
           </>
@@ -74,10 +112,6 @@ function MatchCard({ match, type }) {
 
       <div className="match-card-bottom">
         <MatchStatusBadge type={type} label={match.status} />
-
-        <span className="match-time">
-          {match.time}
-        </span>
       </div>
     </article>
   );

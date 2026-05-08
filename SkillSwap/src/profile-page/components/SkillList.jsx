@@ -6,9 +6,9 @@ function SkillList({ skillsOffered, skillsWanted }) {
         return skill;
       }
 
-      return skill?.name;
+      return skill?.name || skill?.skill || skill?.title;
     })
-    .filter(Boolean);
+    .filter((skillName) => skillName && skillName.trim());
 
   return (
     <div className="skill-list-section">
@@ -30,7 +30,6 @@ function SkillList({ skillsOffered, skillsWanted }) {
               </div>
 
               <p className="skill-category">{skill.category}</p>
-              <p className="skill-description">{skill.description}</p>
             </div>
           ))
         )}

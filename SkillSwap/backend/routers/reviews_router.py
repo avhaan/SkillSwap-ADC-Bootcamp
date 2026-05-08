@@ -29,14 +29,14 @@ def _review_to_public(review: dict) -> ReviewPublic:
     def format_dt(dt):
         # %B = Full Month (capitalized), %Y = Year, %M = Minute, %p = am/pm
         # Using a platform-independent way to strip leading zeros from Day (%d) and Hour (%I)
-        
+
         # If on Windows, use %#d and %#I
         # Apple (macOS) and Linux use '-', Windows uses '#'
         flag = '#' if platform.system() == 'Windows' else '-'
-        
+
         # Construct the format string dynamically
         fmt_str = f"%B %{flag}d, %Y, %{flag}I:%M %p"
-        
+
         # This handles "pm" to "pm" while keeping "May" capitalized
         return dt.strftime(fmt_str).replace("AM", "am").replace("PM", "pm")
 
