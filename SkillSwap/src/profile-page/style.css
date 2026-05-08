@@ -67,13 +67,17 @@
     height: 120px;
     margin: 0 auto 22px;
     border-radius: 50%;
-    background-color: #4b8059;
+    background-color: #e95724;
     color: white;
     font-size: 38px;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.profile-page .profile-initials {
+    color: white;
 }
 
 .profile-page .profile-avatar img {
@@ -152,6 +156,11 @@
     margin: 0;
 }
 
+.profile-page .locked-contact-text {
+    color: #6b625b;
+    line-height: 1.4;
+}
+
 
 /* ====================
    Profile Buttons Row
@@ -161,6 +170,10 @@
     display: flex;
     gap: 10px;
     margin-top: 8px;
+}
+
+.profile-page .profile-own-actions {
+    flex-direction: column;
 }
 
 
@@ -232,6 +245,41 @@
 
 .profile-page .edit-profile-button:hover {
     background-color: #333333;
+}
+
+.profile-page .profile-logout-button {
+    width: 100%;
+    background-color: white;
+    color: #181818;
+    border: 2px solid #181818;
+    padding: 14px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.profile-page .match-request-button,
+.profile-page .match-login-link {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #181818;
+    color: white;
+    border: none;
+    padding: 14px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.profile-page .match-request-button:disabled {
+    background-color: #e8e3da;
+    color: #6b625b;
+    cursor: not-allowed;
 }
 
 
