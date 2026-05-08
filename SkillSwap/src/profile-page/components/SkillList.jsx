@@ -1,12 +1,15 @@
 function SkillList({ skillsOffered, skillsWanted }) {
-  const cleanSkillsOffered = (skillsOffered || []).filter((skill) => skill && skill.name);
+  const cleanSkillsOffered = (skillsOffered || []).filter((skill) => {
+    return skill && typeof skill.name === "string" && skill.name.trim();
+  });
+
   const cleanSkillsWanted = (skillsWanted || [])
     .map((skill) => {
       if (typeof skill === "string") {
-        return skill;
+        return skill.trim();
       }
 
-      return skill?.name || skill?.skill || skill?.title;
+      return skill?.name || skill?.skill || skill?.title || "";
     })
     .filter((skillName) => skillName && skillName.trim());
 
@@ -23,13 +26,17 @@ function SkillList({ skillsOffered, skillsWanted }) {
           cleanSkillsOffered.map((skill, index) => (
             <div key={index} className="single-skill-card">
               <div className="skill-title-row">
-                <h3>{skill.name}</h3>
-                <span className={`skill-level ${(skill.proficiency || "beginner").toLowerCase()}`}>
-                 •  {skill.proficiency || "Beginner"}
+                <h3>{skill.name.trim()}</h3>
+                <span className={`skill-level ${(skill.proficiency || "Beginner").toLowerCase()}`}>
+                  • {skill.proficiency || "Beginner"}
                 </span>
               </div>
 
-              <p className="skill-category">{skill.category}</p>
+              <p className="skill-category">{skill.category || "Other"}</p>
+
+              {typeof skill.description === "string" && skill.description.trim() && (
+                <p className="skill-description">{skill.description.trim()}</p>
+              )}
             </div>
           ))
         )}
