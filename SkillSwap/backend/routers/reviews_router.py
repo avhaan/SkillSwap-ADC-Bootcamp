@@ -3,6 +3,7 @@ from bson import ObjectId
 from datetime import datetime
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
+import platform
 
 from ..auth import get_current_user_id
 from ..database import reviews_collection, users_collection
@@ -25,14 +26,28 @@ def _validate_current_user_id(user_id: str) -> ObjectId:
 # Takes data from MongoDB and returns in clean format
 def _review_to_public(review: dict) -> ReviewPublic:
     review_dict = doc_to_dict(review)
+    def format_dt(dt):
+        # %B = Full Month (capitalized), %Y = Year, %M = Minute, %p = am/pm
+        # Using a platform-independent way to strip leading zeros from Day (%d) and Hour (%I)
+        
+        # If on Windows, use %#d and %#I
+        # Apple (macOS) and Linux use '-', Windows uses '#'
+        flag = '#' if platform.system() == 'Windows' else '-'
+        
+        # Construct the format string dynamically
+        fmt_str = f"%B %{flag}d, %Y, %{flag}I:%M %p"
+        
+        # This handles "pm" to "pm" while keeping "May" capitalized
+        return dt.strftime(fmt_str).replace("AM", "am").replace("PM", "pm")
+
     return ReviewPublic(
         id=review_dict["id"],
         reviewer_id=review_dict["reviewer_id"],
         reviewer_name=review_dict["reviewer_name"],
         rating=review_dict["rating"],
         comment=review_dict["comment"],
-        created_at=review_dict["created_at"],
-        updated_at=review_dict["updated_at"],
+        created_at=format_dt(review_dict["created_at"]),
+        updated_at=format_dt(review_dict["updated_at"]),
     )
 
 # looks up all reviews for a user, calculates avg rating and total number of reviews, and returns a list of reviews sorted by newest first
