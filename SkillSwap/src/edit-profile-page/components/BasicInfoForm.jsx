@@ -37,17 +37,6 @@ function BasicInfoForm({ formData, updateBasicInfo }) {
         />
       </div>
 
-      <div className="input-group">
-        <label>Avatar URL (optional)</label>
-        <input
-          type="text"
-          placeholder="Paste image URL or leave blank"
-          value={formData.avatar_url || ""}
-          onChange={(event) =>
-            updateBasicInfo("avatar_url", event.target.value)
-          }
-        />
-      </div>
     </section>
   );
 }

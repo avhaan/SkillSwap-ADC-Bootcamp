@@ -35,11 +35,7 @@ export default function SkillCard({ user }) {
     <div className="skill-card" onClick={() => navigate(`/profile/${user._id}`)}>
       <div className="skill-card-top">
         <div className={`skill-card-avatar ${avatarColor}`}>
-          {user.avatar_url ? (
-            <img src={user.avatar_url} alt={user.name} />
-          ) : (
-            <span>{initials}</span>
-          )}
+          <span>{initials}</span>
         </div>
 
         <div className="skill-card-user-info">

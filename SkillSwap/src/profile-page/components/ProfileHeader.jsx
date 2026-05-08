@@ -58,11 +58,7 @@ function ProfileHeader({ profile, isOwnProfile, loggedIn, matchStatus, onMatchSt
   return (
     <div className="profile-header">
       <div className="profile-avatar">
-        {profile.avatar_url ? (
-          <img src={profile.avatar_url} alt={profile.name} />
-        ) : (
-          <span className="profile-initials">{initials}</span>
-        )}
+        <span className="profile-initials">{initials}</span>
       </div>
 
       <div className="profile-info">

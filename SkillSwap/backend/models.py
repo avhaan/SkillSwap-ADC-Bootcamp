@@ -87,7 +87,6 @@ class UserPublic(BaseModel):
     name: str
     email: str
     bio: Optional[str] = None
-    avatar_url: Optional[str] = None
     location: Optional[str] = None
     contact: ContactInfo
     skills_offered: List[SkillOffered] = []
@@ -99,7 +98,6 @@ class UserPublic(BaseModel):
 class UserCard(BaseModel):
     id: str
     name: str
-    avatar_url: Optional[str] = None
     location: Optional[str] = None
     skills_offered: List[SkillOffered] = []
     like_count: int = 0
@@ -108,7 +106,6 @@ class UserCard(BaseModel):
 class UpdateProfileRequest(BaseModel):
     name: Optional[str] = Field(None, min_length=1, max_length=80)
     bio: Optional[str] = Field(None, max_length=300)
-    avatar_url: Optional[str] = None
     location: Optional[str] = Field(None, max_length=100)
     contact: Optional[ContactInfo] = None
     skills_offered: Optional[List[SkillOffered]] = None

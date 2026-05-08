@@ -13,7 +13,6 @@ function EditProfilePage() {
     name: "Maya Ramirez",
     location: "College Park, MD",
     bio: "Linguist by training, guitarist by accident.",
-    avatar_url: "",
     skills_offered: [
       {
         name: "Spanish",

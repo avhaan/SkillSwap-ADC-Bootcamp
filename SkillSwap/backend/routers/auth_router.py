@@ -32,7 +32,6 @@ async def register(user: dict):
     "email": user["email"],
     "password_hash": hash_password(user["password"]),
     "bio": "",
-    "avatar_url": "",
     "location": "",
     "contact": {
         "show_email": True,
@@ -73,7 +72,6 @@ async def login(user: dict):
     "access_token": token,
     "token_type": "bearer"
     }
-
 
 
 
