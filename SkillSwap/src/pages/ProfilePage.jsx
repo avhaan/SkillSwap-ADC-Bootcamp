@@ -72,10 +72,17 @@ function ProfilePage() {
         
         const revs = await apiGetReviews(user_id)
         setReviews(revs) 
-      } catch (error) {
-      console.error("Failed to load profile:", error);
-    } finally {
-      setLoading(false);
+      }
+      catch (err) {
+        console.error(err);
+        setUser(null);
+        setIsOwnProfile(false);
+        setLoggedIn(false);
+        setReviews(emptyReviews);
+      } 
+      finally {
+        setLoading(false);
+      }
     }
       
     } 
