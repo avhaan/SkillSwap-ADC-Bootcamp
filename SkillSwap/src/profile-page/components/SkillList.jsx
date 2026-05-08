@@ -1,20 +1,31 @@
 function SkillList({ skillsOffered, skillsWanted }) {
+  const cleanSkillsOffered = (skillsOffered || []).filter((skill) => skill && skill.name);
+  const cleanSkillsWanted = (skillsWanted || [])
+    .map((skill) => {
+      if (typeof skill === "string") {
+        return skill;
+      }
+
+      return skill?.name;
+    })
+    .filter(Boolean);
+
   return (
     <div className="skill-list-section">
 
       <div className="skills-box">
         <h2>Skills <span>Offered</span></h2>
 
-        {skillsOffered.length === 0 ? (
+        {cleanSkillsOffered.length === 0 ? (
           // checking edge cases
           <p>No skills offered yet.</p>
         ) : (
-          skillsOffered.map((skill, index) => (
+          cleanSkillsOffered.map((skill, index) => (
             <div key={index} className="single-skill-card">
               <div className="skill-title-row">
                 <h3>{skill.name}</h3>
-                <span className={`skill-level ${skill.proficiency.toLowerCase()}`}>
-                 •  {skill.proficiency}
+                <span className={`skill-level ${(skill.proficiency || "beginner").toLowerCase()}`}>
+                 •  {skill.proficiency || "Beginner"}
                 </span>
               </div>
 
@@ -28,12 +39,12 @@ function SkillList({ skillsOffered, skillsWanted }) {
       <div className="skills-box">
         <h2>Skills <span>Wanted</span></h2>
 
-        {skillsWanted.length === 0 ? (
+        {cleanSkillsWanted.length === 0 ? (
           <p>No skills wanted yet.</p>
         ) : (
-          skillsWanted.map((skill, index) => (
+          cleanSkillsWanted.map((skill, index) => (
             <div key={index} className="wanted-skill-pill">
-              <h3>{skill.name}</h3>
+              <h3>{skill}</h3>
             </div>
           ))
         )}
