@@ -32,7 +32,7 @@ function ProfileHeader({ profile, isOwnProfile, user_id }) {
           ) : (
             <>
               <LikeButton initialLikes={profile.like_count} user_id={profile._id} />
-              <ContactButton email={profile.email} />
+              <ContactButton email={profile.email} user_id={profile._id} />
             </>
           )}
         </div>

@@ -1,5 +1,7 @@
 import "../matches-page/style.css";
 import MatchSection from "../matches-page/components/MatchSection";
+import { useEffect, useState } from "react";
+import { apiGetMyMatches } from "../api/api";
 
 function MatchesPage() {
   const currentMatches = [
@@ -24,6 +26,8 @@ function MatchesPage() {
       time: "5 days ago",
     },
   ];
+
+  
 
   const incomingRequests = [
     {
@@ -51,6 +55,33 @@ function MatchesPage() {
     },
   ];
 
+  const [matches, setMatches] = useState({current_matches: [], incoming_pending: [], outgoing_pending: []})
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    async function loadMatches() {
+      setLoading(true)
+      try {
+        const myMatches = await apiGetMyMatches()
+        console.log(myMatches)
+        setMatches(myMatches)
+      }
+
+      catch (err) {
+
+      }
+
+      finally{
+        setLoading(false)
+      }
+    }
+
+    loadMatches()
+  }, [])
+
+  if (loading)
+    return <p>loading...</p>
+
   return (
     <div className="matches-page">
       <main className="matches-container">
@@ -75,24 +106,24 @@ function MatchesPage() {
         <MatchSection
           title="Current"
           accent="matches"
-          countText={`${currentMatches.length} active`}
-          matches={currentMatches}
+          countText={`${matches.current_matches.length} active`}
+          matches={matches.current_matches}
           type="matched"
         />
 
         <MatchSection
           title="Incoming"
           accent="requests"
-          countText={`${incomingRequests.length} waiting on you`}
-          matches={incomingRequests}
+          countText={`${matches.incoming_pending.length} waiting on you`}
+          matches={matches.incoming_pending}
           type="incoming"
         />
 
         <MatchSection
           title="Sent"
           accent="requests"
-          countText={`${sentRequests.length} awaiting response`}
-          matches={sentRequests}
+          countText={`${matches.outgoing_pending.length} awaiting response`}
+          matches={matches.outgoing_pending}
           type="sent"
         />
       </main>

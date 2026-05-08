@@ -84,11 +84,8 @@ function ProfilePage() {
         setLoading(false);
       }
     }
-      
-    } 
-
-    loadProfile();
-  }, [isMeRoute, user_id]);
+      loadProfile();
+    } , [isMeRoute, user_id])
 
   if (loading) {
     return <p>Loading...</p>;
