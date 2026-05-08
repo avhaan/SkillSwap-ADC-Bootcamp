@@ -30,7 +30,6 @@ function SkillList({ skillsOffered, skillsWanted }) {
               </div>
 
               <p className="skill-category">{skill.category}</p>
-              <p className="skill-description">{skill.description}</p>
             </div>
           ))
         )}

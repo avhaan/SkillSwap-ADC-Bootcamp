@@ -25,7 +25,6 @@ async def get_users(
             {"name": {"$regex": safe_search, "$options": "i"}},
             {"location": {"$regex": safe_search, "$options": "i"}},
             {"skills_offered.name": {"$regex": safe_search, "$options": "i"}},
-            {"skills_offered.description": {"$regex": safe_search, "$options": "i"}},
             {"skills_wanted.name": {"$regex": safe_search, "$options": "i"}},
         ]
 
@@ -43,8 +42,7 @@ async def get_users(
 
     if search:
         query["$or"] = [
-        {"skills_offered.name": {"$regex": search, "$options": "i"}},
-        {"skills_offered.description": {"$regex": search, "$options": "i"}},]
+        {"skills_offered.name": {"$regex": search, "$options": "i"}},]
 
     if proficiency:
         query["skills_offered.proficiency"] = proficiency
