@@ -2,70 +2,84 @@
    Browse Page Layout
    ==================== */
 
-/* browse page container */
 .browse {
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 46px 52px 60px;
 }
 
-/* page title */
 .browse-title {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 24px;
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 10px;
   color: var(--ink);
 }
 
-/* search and filter row */
+.browse-title span {
+  color: var(--accent);
+}
+
+
+.browse-title-line {
+  width: 100%;
+  height: 1px;
+  background-color: #d8cfc4;
+  margin: 18px 0 28px;
+}
+
+
+.browse-subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 26px;
+}
+
 .browse-controls {
   display: flex;
   gap: 16px;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 34px;
   flex-wrap: wrap;
 }
 
-/* card grid */
 .browse-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: 28px 30px;
 }
 
-/* loading text */
 .browse-loading {
   color: var(--muted);
   font-size: 14px;
 }
 
-/* empty state text */
 .browse-empty {
   color: var(--muted);
   font-size: 14px;
 }
 
+
 /* ====================
    Filter Panel
    ==================== */
 
-/* Filter panel container */
 .filter-panel {
   display: flex;
   gap: 12px;
   align-items: center;
 }
 
-/* Dropdown select */
 .filter-select {
-  padding: 8px 16px;
-  border-radius: 20px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
   border: 1px solid var(--line);
   background-color: var(--card);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink);
   outline: none;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 
@@ -73,142 +87,151 @@
    Pagination
    ==================== */
 
-/* pagination container */
 .pagination {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
   justify-content: center;
-  margin-top: 24px;
+  margin-top: 36px;
 }
 
-/* page buttons */
 .pagination-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
   border: 1px solid var(--line);
   background-color: var(--card);
   color: var(--ink);
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
 }
 
-/* active page button */
 .pagination-btn.active {
-  background-color: var(--accent);
+  background-color: #181818;
   color: #fff;
-  border-color: var(--accent);
+  border-color: #181818;
 }
 
-/* disabled button */
 .pagination-btn:disabled {
   color: var(--muted);
   cursor: not-allowed;
 }
 
+
 /* ====================
    Search Bar
    ==================== */
 
-/* Search bar container */
 .searchbar {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
 }
 
-/* Text input */
 .searchbar-input {
-  padding: 8px 16px;
-  border-radius: 20px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
   border: 1px solid var(--line);
   background-color: var(--card);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink);
   outline: none;
-  width: 300px;
+  width: 340px;
+  box-sizing: border-box;
 }
 
-/* Search button */
+
 .searchbar-btn {
-  padding: 8px 20px;
-  border-radius: 20px;
+  height: 44px;
+  padding: 0 26px;
+  border-radius: 999px;
   border: none;
   background-color: var(--accent);
   color: #fff;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 /* ====================
    Skill Badge
    ==================== */
 
-/* Base pill styles */
 .skill-badge {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 600;
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
-/* Proficiency colors from the mockup style guide */
 .skill-badge.beginner {
-  background-color: #dbeafe;
-  color: #1d4ed8;
+  background-color: #dfefff;
+  color: #4b77b5;
 }
 
 .skill-badge.intermediate {
-  background-color: #dcfce7;
-  color: #15803d;
+  background-color: #dff1e3;
+  color: #4e8b61;
 }
 
 .skill-badge.advanced {
-  background-color: #ffedd5;
-  color: #c2410c;
+  background-color: #ffe7d6;
+  color: #d97732;
 }
 
 .skill-badge.expert {
-  background-color: #f3e8ff;
-  color: #7e22ce;
+  background-color: #eee4fb;
+  color: #8a63b8;
 }
+
 
 /* ====================
    Skill Card
    ==================== */
 
-/* Card container */
 .skill-card {
   background-color: var(--card);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 20px;
-  width: 220px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  border-radius: 14px;
+  padding: 28px 28px 20px;
+  min-height: 180px;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Avatar circle */
+.skill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(90, 70, 50, 0.08);
+}
+
+.skill-card-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
 .skill-card-avatar {
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
-  background-color: var(--accent);
-  color: #fff;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 18px;
+  flex-shrink: 0;
 }
 
-/* Avatar image */
 .skill-card-avatar img {
   width: 100%;
   height: 100%;
@@ -216,30 +239,108 @@
   object-fit: cover;
 }
 
-/* Name */
-.skill-card-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ink);
-  text-align: center;
+.skill-card-avatar span {
+  color: white;
 }
 
-/* Location */
+.avatar-orange {
+  background-color: #e9825e;
+}
+
+.avatar-blue {
+  background-color: #6f91b8;
+}
+
+.avatar-green {
+  background-color: #6c9b75;
+}
+
+.avatar-purple {
+  background-color: #a98ac4;
+}
+
+.avatar-gold {
+  background-color: #d9b75d;
+}
+
+.avatar-pink {
+  background-color: #d99aa6;
+}
+
+.skill-card-user-info {
+  min-width: 0;
+}
+
+.skill-card-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
 .skill-card-location {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--muted);
 }
 
-/* Badges row */
 .skill-card-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  justify-content: center;
+  gap: 2px;
+  min-height: 34px;
 }
 
-/* Like count */
-.skill-card-likes {
-  font-size: 12px;
+.skill-card-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--line);
+  margin: 18px 0 14px;
+}
+
+.skill-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: var(--muted);
+  font-size: 14px;
+}
+
+.skill-card-likes,
+.skill-card-rating {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.skill-card-rating {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+
+/* ====================
+   Responsive
+   ==================== */
+
+@media (max-width: 1050px) {
+  .browse-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .browse {
+    padding: 32px 22px 50px;
+  }
+
+  .browse-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .searchbar {
+    width: 100%;
+  }
+
+  .searchbar-input {
+    width: 100%;
+  }
 }
