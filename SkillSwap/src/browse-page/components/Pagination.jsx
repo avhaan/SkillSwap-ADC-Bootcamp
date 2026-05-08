@@ -13,8 +13,9 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className="pagination-btn"
+        aria-label="Previous page"
       >
-        
+        ←
       </button>
 
       {/* so Array.from basically creates a new array and it has 3 arguments. the first one
@@ -39,8 +40,9 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className="pagination-btn"
+        aria-label="Next page"
       >
-        
+        →
       </button>
 
     </div>
