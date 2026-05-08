@@ -7,6 +7,7 @@ import BrowsePage from "./pages/BrowsePage";
 import LandingPage from "./pages/LandingPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import RegisterPage from "./pages/RegisterPage";
+import MatchesPage from "./pages/MatchesPage";
 import { AuthProvider } from "./context/AuthContext";
 import LoginPage from "./pages/LoginPage";
 
@@ -31,6 +32,7 @@ function AppLayout() {
         <Route path="/profile/me/edit" element={<EditProfilePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/matches" element={<MatchesPage />} />
       </Routes>
     </AuthProvider>
   );
