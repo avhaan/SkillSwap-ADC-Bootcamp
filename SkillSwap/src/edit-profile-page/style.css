@@ -183,6 +183,35 @@
     border-color: #b3a79b;
 }
 
+.offered-skill-block {
+    margin-bottom: 16px;
+}
+
+.offered-skill-description {
+    width: 100%;
+    min-height: 82px;
+    border: 1px solid #d8cfc4;
+    border-radius: 10px;
+    background-color: white;
+    color: #181818;
+    font-size: 15px;
+    padding: 12px 14px;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-top: 2px;
+}
+
+.offered-skill-description:focus {
+    border-color: #e95724;
+    box-shadow: 0 0 0 3px rgba(233, 87, 36, 0.12);
+}
+
+.offered-skill-description::placeholder {
+    color: #8a8178;
+}
+
 
 /* ====================
    Wanted Skill Editor
