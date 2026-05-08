@@ -85,7 +85,7 @@ function ProfilePage() {
       }
     }
       
-    } 
+    
 
     loadProfile();
   }, [isMeRoute, user_id]);
