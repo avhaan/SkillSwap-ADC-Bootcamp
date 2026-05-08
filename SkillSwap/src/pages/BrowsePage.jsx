@@ -69,6 +69,7 @@ export default function BrowsePage() {
   return (
     <div className="browse">
       <h1 className="browse-title">The <span className="accent">marketplace</span></h1>
+      <div className="browse-title-line"></div>
 
       <div className="browse-controls">
         <SearchBar
