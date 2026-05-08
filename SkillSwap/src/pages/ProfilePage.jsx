@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { apiGetMe, apiGetReviews, apiGetUser } from "../api/api";
+import { apiGetMatchStatus, apiGetMe, apiGetReviews, apiGetUser } from "../api/api";
 import ProfileHeader from "../profile-page/components/ProfileHeader";
 import SkillList from "../profile-page/components/SkillList";
 import ReviewCard from "../profile-page/components/ReviewCard";
@@ -18,6 +18,7 @@ function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState(emptyReviews);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [matchStatus, setMatchStatus] = useState("none");
   const [showReviewForm, setShowReviewForm] = useState(false);
 
   async function refreshReviews(targetUserId) {
@@ -32,6 +33,7 @@ function ProfilePage() {
       setLoading(true);
       setShowReviewForm(false);
       setReviews(emptyReviews);
+      setMatchStatus("none");
 
       try {
         if (isMeRoute) {
@@ -46,6 +48,7 @@ function ProfilePage() {
           setUser(me);
           setIsOwnProfile(true);
           setLoggedIn(true);
+          setMatchStatus("self");
           await refreshReviews(me._id);
           return;
         }
@@ -64,9 +67,16 @@ function ProfilePage() {
             const me = await apiGetMe();
             setIsOwnProfile(me?._id === profile._id);
             setLoggedIn(Boolean(me));
+            if (me?._id === profile._id) {
+              setMatchStatus("self");
+            } else {
+              const statusData = await apiGetMatchStatus(profile._id);
+              setMatchStatus(statusData.status);
+            }
           } catch {
             setIsOwnProfile(false);
             setLoggedIn(false);
+            setMatchStatus("none");
           }
         }
         
@@ -78,6 +88,7 @@ function ProfilePage() {
         setUser(null);
         setIsOwnProfile(false);
         setLoggedIn(false);
+        setMatchStatus("none");
         setReviews(emptyReviews);
       } 
       finally {
@@ -115,21 +126,34 @@ function ProfilePage() {
     <div className="profile-page">
       <main className="profile-layout">
         <aside className="profile-sidebar">
-          <ProfileHeader profile={user} isOwnProfile={isOwnProfile}/>
+          <ProfileHeader
+            profile={user}
+            isOwnProfile={isOwnProfile}
+            loggedIn={loggedIn}
+            matchStatus={matchStatus}
+            onMatchStatusChange={setMatchStatus}
+          />
 
-          <div className="contact-card">
-            <h3>CONTACT INFO</h3>
+          {(isOwnProfile || matchStatus === "matched") ? (
+            <div className="contact-card">
+              <h3>CONTACT INFO</h3>
 
-            <div className="contact-row">
-              <span>Email</span>
-              <p>{user.email}</p>
+              <div className="contact-row">
+                <span>Email</span>
+                <p>{user.email}</p>
+              </div>
+
+              <div className="contact-row">
+                <span>Phone</span>
+                <p>{user.contact?.phone ? user.contact.phone : "Unknown"}</p>
+              </div>
             </div>
-
-            <div className="contact-row">
-              <span>Phone</span>
-              <p>{user.contact?.phone ? user.contact.phone : "Unknown"}</p>
+          ) : (
+            <div className="contact-card">
+              <h3>CONTACT INFO</h3>
+              <p className="locked-contact-text">Match with this person to see contact info.</p>
             </div>
-          </div>
+          )}
         </aside>
 
         <section className="profile-content">

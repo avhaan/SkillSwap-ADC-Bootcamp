@@ -67,7 +67,7 @@
     height: 120px;
     margin: 0 auto 22px;
     border-radius: 50%;
-    background-color: #4b8059;
+    background-color: #e95724;
     color: white;
     font-size: 38px;
     font-weight: bold;
@@ -150,6 +150,11 @@
     font-weight: 400;
     text-align: right;
     margin: 0;
+}
+
+.profile-page .locked-contact-text {
+    color: #6b625b;
+    line-height: 1.4;
 }
 
 
@@ -252,6 +257,29 @@
 
 .profile-page .profile-logout-button:hover {
     background-color: #f5f0e8;
+}
+
+.profile-page .match-request-button,
+.profile-page .match-login-link {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #e95724;
+    color: white;
+    border: none;
+    padding: 14px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.profile-page .match-request-button:disabled {
+    background-color: #e8e3da;
+    color: #6b625b;
+    cursor: not-allowed;
 }
 
 

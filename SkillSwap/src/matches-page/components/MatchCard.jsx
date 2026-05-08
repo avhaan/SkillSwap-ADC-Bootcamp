@@ -1,6 +1,7 @@
 import MatchStatusBadge from "./MatchStatusBadge";
+import { Link } from "react-router-dom";
 
-function MatchCard({ match, type }) {
+function MatchCard({ match, type, onAccept, onDecline, onCancel }) {
   function getAvatarClass() {
     if (match.avatarColor === "purple") {
       return "match-avatar purple";
@@ -37,23 +38,35 @@ function MatchCard({ match, type }) {
       <div className="match-actions">
         {type === "matched" && (
           <>
-            <button type="button" className="primary-match-button">
+            <Link to={`/profile/${match.otherId}`} className="primary-match-button">
               Open profile
-            </button>
+            </Link>
 
-            <button type="button" className="secondary-match-button">
+            <a href={`mailto:${match.email || ""}`} className="secondary-match-button">
               Contact
+            </a>
+
+            <button
+              type="button"
+              className="secondary-match-button"
+              onClick={() => onCancel(match.otherId)}
+            >
+              Unmatch
             </button>
           </>
         )}
 
         {type === "incoming" && (
           <>
-            <button type="button" className="accept-button">
+            <button type="button" className="accept-button" onClick={() => onAccept(match.id)}>
               Accept
             </button>
 
-            <button type="button" className="secondary-match-button">
+            <button
+              type="button"
+              className="secondary-match-button"
+              onClick={() => onDecline(match.id)}
+            >
               Decline
             </button>
           </>
@@ -65,7 +78,11 @@ function MatchCard({ match, type }) {
               Request sent
             </button>
 
-            <button type="button" className="secondary-match-button">
+            <button
+              type="button"
+              className="secondary-match-button"
+              onClick={() => onCancel(match.otherId)}
+            >
               Cancel
             </button>
           </>

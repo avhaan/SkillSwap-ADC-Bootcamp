@@ -234,6 +234,16 @@ export async function apiDeclineMatch(matchID) {
   return handleResponse(res);
 }
 
+// cancels a pending request or removes an accepted match with userID
+export async function apiCancelOrUnmatch(userID) {
+  const res = await fetch(`${BASE}/api/matches/${userID}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+
+  return handleResponse(res);
+}
+
 // gets the status of a match request with logged in user and user with ID userID
 export async function apiGetMatchStatus(userID) {
   const res = await fetch(`${BASE}/api/matches/${userID}/status`, {
@@ -243,4 +253,3 @@ export async function apiGetMatchStatus(userID) {
 
   return handleResponse(res);
 }
-
