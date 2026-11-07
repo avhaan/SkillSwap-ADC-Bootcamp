@@ -3,6 +3,7 @@ from .routers import auth_router, users_router, categories_router, reviews_route
 from contextlib import asynccontextmanager
 from .database import create_indexes
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 
 
@@ -21,7 +22,7 @@ app.add_middleware(
         "http://127.0.0.1:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-    ],
+    ] + [origin.strip() for origin in os.getenv("CORS_ORIGINS", "").split(",") if origin.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   apiAcceptMatch,
   apiCancelOrUnmatch,
@@ -24,7 +24,7 @@ function MatchesPage() {
     const otherName =
       match.requester_id === currentUser._id ? match.receiver_name : match.requester_name;
 
-    let otherUser = null;
+    let otherUser;
     try {
       otherUser = await apiGetUser(otherId);
     } catch {
@@ -54,8 +54,7 @@ function MatchesPage() {
     };
   }
 
-  async function loadMatches() {
-    setLoading(true);
+  const loadMatches = useCallback(async () => {
 
     try {
       const currentUser = await apiGetMe();
@@ -77,11 +76,13 @@ function MatchesPage() {
     }
 
     setLoading(false);
-  }
+  }, []);
 
   useEffect(() => {
+    // This loader updates state after fetching the current user and matches.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadMatches();
-  }, []);
+  }, [loadMatches]);
 
   async function handleAccept(matchID) {
     await apiAcceptMatch(matchID);
