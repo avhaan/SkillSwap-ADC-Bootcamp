@@ -5,13 +5,13 @@ const AuthContext = createContext(null)
 export function AuthProvider({children}) {
     const [user, setUser] = useState(null)
     const [token, setToken] = useState(() => localStorage.getItem("token"))
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(() => Boolean(localStorage.getItem("token")))
     
     // runs whenever token is updated
     useEffect(() => {
         if (token) { // if there is a token already
             // api call to get information about the user
-            fetch("http://localhost:8000/api/auth/me", {
+            fetch(`${(import.meta.env.VITE_API_URL || "http://localhost:8000").replace(/\/$/, "")}/api/auth/me`, {
                 headers: {Authorization: `Bearer ${token}`}
             })
 
@@ -26,9 +26,6 @@ export function AuthProvider({children}) {
             .catch(() => setLoading(false))
         }
         
-        else { // no token currently
-            setLoading(false)
-        }
     }, [token])
 
     // logs a user in using their token and their user data
@@ -49,10 +46,6 @@ export function AuthProvider({children}) {
         setUser(updatedUser)
     }
 
-    // returns whether a user is logged in or not
-    function isUserLoggedIn() {
-        return (localStorage.getItem("token") !== null)
-    }
 
     return (
         <AuthContext.Provider value = {{user, token, loading, login, logout, refreshUser}}>
@@ -61,6 +54,8 @@ export function AuthProvider({children}) {
     )
 }
 
+// The authentication hook intentionally shares its provider's context.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
     return useContext(AuthContext)
 }

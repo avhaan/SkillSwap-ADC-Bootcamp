@@ -3,6 +3,10 @@ from bson import ObjectId
 from ..auth import get_current_user_id
 from ..database import matches_collection, users_collection
 from pymongo.errors import DuplicateKeyError
+from typing import Annotated
+from fastapi import Path
+
+MongoId = Annotated[str, Path(pattern=r"^[0-9a-f]{24}$")]
 
 
 
@@ -18,7 +22,7 @@ def make_pair_key(user_id_1: str, user_id_2: str) -> str:
 
 @router.post("/{user_id}")
 async def send_match_request(
-    user_id: str,
+    user_id: MongoId,
     current_user_id: str = Depends(get_current_user_id)
 ):
     if user_id == current_user_id:
@@ -99,7 +103,7 @@ async def get_my_matches(current_user_id: str = Depends(get_current_user_id)):
 
 @router.put("/{match_id}/accept")
 async def accept_match(
-    match_id: str,
+    match_id: MongoId,
     current_user_id: str = Depends(get_current_user_id)
 ):
     match = await matches_collection.find_one({"_id": ObjectId(match_id)})
@@ -133,7 +137,7 @@ async def accept_match(
 
 @router.put("/{match_id}/decline")
 async def decline_match(
-    match_id: str,
+    match_id: MongoId,
     current_user_id: str = Depends(get_current_user_id)
 ):
     match = await matches_collection.find_one({"_id": ObjectId(match_id)})
@@ -154,7 +158,7 @@ async def decline_match(
 
 @router.delete("/{user_id}")
 async def cancel_or_unmatch(
-    user_id: str,
+    user_id: MongoId,
     current_user_id: str = Depends(get_current_user_id)
 ):
     if user_id == current_user_id:
@@ -176,7 +180,7 @@ async def cancel_or_unmatch(
 
 @router.get("/{user_id}/status")
 async def get_match_status(
-    user_id: str,
+    user_id: MongoId,
     current_user_id: str = Depends(get_current_user_id)
 ):
     if user_id == current_user_id:

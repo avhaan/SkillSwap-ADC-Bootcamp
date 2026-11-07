@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../../context/AuthContext"; 
 import { useNavigate } from "react-router-dom";
 import { apiGetLikeStatus, apiToggleLike } from "../../api/api";
 
@@ -7,7 +6,6 @@ function LikeButton({ initialLikes, user_id }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(initialLikes);
 
-  const {isUserLoggedIn} = useAuth()
   const navigate = useNavigate()
 
 
@@ -21,8 +19,8 @@ function LikeButton({ initialLikes, user_id }) {
             setLiked(userLiked.liked)
           }
 
-          catch (err) {
-
+          catch {
+            // Keep the initial state if the status cannot be loaded.
           }
           
         }
@@ -30,18 +28,17 @@ function LikeButton({ initialLikes, user_id }) {
 
       loadButton()
 
-      }, []
+      }, [user_id]
   )
 
   async function handleLikeClick() {
     try {
       await apiToggleLike(user_id)
-      const userLiked = await apiGetLikeStatus(user_id)
 
     }
  
-    catch (err) {
-
+    catch {
+      return; // Preserve the displayed state when the request fails.
     }
 
     if (liked) {

@@ -54,7 +54,7 @@ function EditProfilePage() {
         }
   
         catch (err) {
-  
+          console.error("Unable to load profile", err)
         }
   
         finally {
@@ -163,7 +163,8 @@ function EditProfilePage() {
     }
 
     catch (err) {
-
+      console.error("Unable to save profile", err)
+      return
     }
     
     navigate("/profile/me")
